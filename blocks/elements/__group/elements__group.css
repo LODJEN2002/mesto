@@ -1,5 +1,7 @@
 .elements__group {
   margin-right: 20px;
+  width: 22px;
+  height: 19px;
   cursor: pointer;
 }
 
