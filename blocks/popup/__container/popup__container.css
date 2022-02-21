@@ -1,0 +1,23 @@
+.popup__container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 430px;
+  height: 330px;
+  margin-top: -179px; /* 16 */
+  margin-left: -215px;
+  background-color: white;
+  color:black;
+  z-index: 2;
+  border-radius: 10px;
+}
+
+
+@media screen and (max-width: 320px) {
+  .popup__container {
+    width: 282px;
+    left: 0%;
+    margin-top: -161px; /* 16 */
+    margin-left: 19px;
+  }
+}

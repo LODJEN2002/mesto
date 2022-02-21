@@ -1,0 +1,21 @@
+.elements {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  flex-wrap: wrap;
+  width: 880px;
+  margin-bottom: 66px;
+}
+
+@media screen and (max-width: 901px) {
+  .elements {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .elements {
+    width: 320px;
+  }
+}
