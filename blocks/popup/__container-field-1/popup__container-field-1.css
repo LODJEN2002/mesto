@@ -1,10 +1,9 @@
-.popup__container-field-1 {
+.popup__container-field-title {
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 17px;
-  margin-left: 36px;
-  width: 358px;
+  min-width: 358px;
   border: 0px solid rgba(0,0,0,0.2);
   border-bottom: 1px solid rgba(0,0,0,0.2);
   outline-color: lightblue;
@@ -12,9 +11,14 @@
   padding: 13px 0 13px 0;
 }
 
+@media screen and (max-width:460px) {
+  .popup__container-field-title {
+    min-width: 85%;
+  }
+}
+
 @media screen and (max-width:320px) {
-  .popup__container-field-1 {
-    width: 238px;
-    margin-left: 22px;
+  .popup__container-field-title {
+    min-width: 238px;
   }
 }

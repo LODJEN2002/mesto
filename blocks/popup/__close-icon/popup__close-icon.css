@@ -1,7 +1,7 @@
 .popup__close-icon {
-  position: fixed;
-  margin-left: 438px;
-  margin-top: -40px;
+  position: absolute;
+  right: -40px;
+  top: -40px;
   cursor: pointer;
 }
 
@@ -9,10 +9,16 @@
   opacity: .6;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 550px) {
+  .popup__close-icon {
+    right: 0;
+  }
+}
+
+@media screen and (max-width: 410px) {
   .popup__close-icon {
     width: 20px;
-    margin-left: 262px;
-    margin-top: -36px;
+    right: 0px;
+    top: -36px;
   }
 }

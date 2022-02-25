@@ -1,5 +1,5 @@
 @import "../vendor/normalize.css";
-@import "../fonts/Inter Web/inter.css";
+@import "../fonts/inter.css";
 @import "../blocks/body/body.css";
 @import "../blocks/header/header.css";
 @import "../blocks/header/__logo/header__logo.css";
@@ -7,7 +7,6 @@
 @import "../blocks/profile/profile.css";
 @import "../blocks/profile/__avatar/profile__avatar.css";
 @import "../blocks/profile/__info/profile__info.css";
-@import "../blocks/profile/__info-text/profile__info-text.css";
 @import "../blocks/profile/__info-text-title/profile__info-text-title.css";
 @import "../blocks/profile/__info-text-subtitle/profile__info-text-subtitle.css";
 @import "../blocks/profile/__edit-button/profile__edit-button.css";
