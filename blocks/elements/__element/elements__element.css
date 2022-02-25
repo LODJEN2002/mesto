@@ -34,6 +34,7 @@
   .elements__element:nth-child(1n+5) {
     margin-bottom: 0px;
   }
+}
 
 @media screen and (max-width: 563px) {
   .elements__element:nth-child(1n+5) {
@@ -43,3 +44,4 @@
   .elements__element:nth-child(6n) {
     margin-bottom: 0px;
   }
+}

@@ -1,7 +1,6 @@
 .popup {
   display: none;
   justify-content: center;
-  z-index: 3;
 	background-color: rgba(0, 0, 0, .5);
 	position: fixed;
 	left: 0;
@@ -14,6 +13,6 @@
 
 @media screen and (max-width:320px) {
   .popup {
-    padding-top: 123px; 
+    padding-top: 123px;
   }
 }
