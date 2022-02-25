@@ -20,12 +20,10 @@ function delite() {
 
 closePopup.addEventListener('click' , delite);
 
-function formSubmitHandler(evt) {
+function formSubmitHandler (evt) {
   evt.preventDefault();
   nameTitle.textContent = nameInput.value;
   jobSubtitle.textContent = jobInput.value;
 }
 
 formElement.addEventListener('submit', formSubmitHandler);
-saveButton.addEventListener('click' , formSubmitHandler);
-saveButton.addEventListener('click' , delite);
