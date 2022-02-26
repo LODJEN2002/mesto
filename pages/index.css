@@ -27,7 +27,7 @@
 @import "../blocks/popup/__close-icon/popup__close-icon.css";
 @import "../blocks/popup/__container/popup__container.css";
 @import "../blocks/popup/__container-title/popup__container-title.css";
-@import "../blocks/popup/__container-field-1/popup__container-field-1.css";
-@import "../blocks/popup/__container-field-2/popup__container-field-2.css";
+@import "../blocks/popup/__container-field-title/popup__container-field-title.css";
+@import "../blocks/popup/__container-field-subtitle/popup__container-field-subtitle.css";
 @import "../blocks/popup/__container-save/popup__container-save.css";
 /*================== Popup ===================== */

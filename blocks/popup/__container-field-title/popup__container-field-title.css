@@ -20,5 +20,7 @@
 @media screen and (max-width:320px) {
   .popup__container-field-title {
     min-width: 238px;
+    padding-top: 0;
+    margin-top: 75px;
   }
 }
