@@ -1,5 +1,7 @@
 .elements__mask-group {
   width: 282px;
+  max-height: 282px;
   border-radius: 10px 10px 0px 0px;
   margin-top: 0px;
+  cursor: pointer;
 }

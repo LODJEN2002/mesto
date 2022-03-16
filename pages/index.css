@@ -18,16 +18,30 @@
 @import "../blocks/elements/__group-white/elements__group-white.css";
 @import "../blocks/elements/__title/elements__title.css";
 @import "../blocks/elements/__group/elements__group.css";
+@import "../blocks/elements/__group/elements__group-like.css";
+@import "../blocks/elements/__trash/elements__trash.css";
 /*================== Elements ===================== */
 @import "../blocks/footer/footer.css";
 @import "../blocks/footer/__mesto/footer__mesto.css";
 /*================== Footer ===================== */
 @import "../blocks/popup/popup.css";
+@import "../blocks/popup/popup-cards.css";
+@import "../blocks/popup/popup-img.css";
 @import "../blocks/popup/_opened/popup_opened.css";
+@import "../blocks/popup/_opened/popup_opened-plus.css";
+@import "../blocks/popup/_opened/popup_opened-img.css";
 @import "../blocks/popup/__close-icon/popup__close-icon.css";
+@import "../blocks/popup/__close-icon/popup__close-icon-pluse.css";
+@import "../blocks/popup/__close-icon/popup__close-icon-img.css";
 @import "../blocks/popup/__container/popup__container.css";
+@import "../blocks/popup/__container/popup__container-img.css";
 @import "../blocks/popup/__container-title/popup__container-title.css";
 @import "../blocks/popup/__container-field-title/popup__container-field-title.css";
+@import "../blocks/popup/__container-field-title/popup__container-field-title-plus.css";
 @import "../blocks/popup/__container-field-subtitle/popup__container-field-subtitle.css";
+@import "../blocks/popup/__container-field-subtitle/popup__container-field-subtitle-plus.css";
 @import "../blocks/popup/__container-save/popup__container-save.css";
+@import "../blocks/popup/__container-save/popup__container-save-plus.css";
+@import "../blocks/popup/__img-img/popup__img-img.css";
+@import "../blocks/popup/__text/popup__text.css";
 /*================== Popup ===================== */

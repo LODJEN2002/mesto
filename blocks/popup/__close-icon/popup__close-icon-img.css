@@ -1,0 +1,10 @@
+.popup__close-icon-img {
+  position: absolute;
+  margin-left: 8px;
+  margin-top: -40px;
+  cursor: pointer;
+}
+
+.popup__close-icon-img:hover {
+  opacity: .6;
+}
