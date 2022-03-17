@@ -1,4 +1,4 @@
-.popup__container_plus {
+.popup-cards__container-plus {
   max-width: 430px;
   max-height: 330px;
   background-color: white;
@@ -10,13 +10,13 @@
 }
 
 @media screen and (max-width: 460px) {
-  .popup__container_plus {
+  .popup-cards__container-plus {
     width: 95%;
   }
 }
 
 @media screen and (max-width: 320px) {
-  .popup__container_plus {
+  .popup-cards__container-plus {
     max-width: 282px;
   }
 }
