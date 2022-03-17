@@ -1,26 +1,25 @@
-.popup__container-field-title-plus {
+.popup-cards__container-field-subtitle-plus {
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 17px;
+  margin-top: 17px;
   min-width: 358px;
   border: 0px solid rgba(0,0,0,0.2);
   border-bottom: 1px solid rgba(0,0,0,0.2);
   outline-color: lightblue;
-  margin-top: 41px;
+  padding-bottom: 13px;
   padding: 13px 0 13px 0;
 }
 
 @media screen and (max-width:460px) {
-  .popup__container-field-title-plus {
+  .popup-cards__container-field-subtitle-plus {
     min-width: 85%;
   }
 }
 
 @media screen and (max-width:320px) {
-  .popup__container-field-title-plus {
+  .popup-cards__container-field-subtitle-plus {
     min-width: 238px;
-    padding-top: 0;
-    margin-top: 75px;
   }
 }

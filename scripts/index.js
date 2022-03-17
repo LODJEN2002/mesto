@@ -37,10 +37,10 @@ const initialCards = [
 
 const buttonPlus = document.querySelector('.profile__add-button')
 const popupPlus = document.querySelector('.popup-cards')
-const closePopupPluse = document.querySelector('.popup__close-icon-pluse')
-const formElementPlus = document.querySelector('.popup__form-plus')
-let inputName = document.querySelector('.popup__container-field-title-plus');
-let inputLink = document.querySelector('.popup__container-field-subtitle-plus');
+const closePopupPluse = document.querySelector('.popup-cards__close-icon-pluse')
+const formElementPlus = document.querySelector('.popup-cards__form-plus')
+let inputName = document.querySelector('.popup-cards__container-field-title-plus');
+let inputLink = document.querySelector('.popup-cards__container-field-subtitle-plus');
 
 
 
