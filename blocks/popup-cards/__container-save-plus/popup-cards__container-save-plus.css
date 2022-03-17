@@ -1,4 +1,4 @@
-.popup__container-save-plus {
+.popup-cards__container-save-plus {
   border: 0;
   border-radius: 2px;
   margin: 0;
@@ -17,18 +17,18 @@
   margin-bottom: 37px;
 }
 
-.popup__container-save-plus:hover {
+.popup-cards__container-save-plus:hover {
   opacity: 0.8;
 }
 
 @media screen and (max-width:460px) {
-  .popup__container-save-plus {
+  .popup-cards__container-save-plus {
     width: 85%;
   }
 }
 
 @media screen and (max-width:320px) {
-  .popup__container-save-plus {
+  .popup-cards__container-save-plus {
     width: 238px;
     font-size: 14px;
     line-height: 17px;

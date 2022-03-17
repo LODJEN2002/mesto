@@ -105,7 +105,7 @@ function renderItem(item) {
   // Попап картинки
 
   const imageFullScreen = initialCardItem.querySelector('.elements__mask-group')
-  const popupImgText = document.querySelector('.popup__text');
+  const popupImgText = document.querySelector('.popup-img__text');
 
   imageFullScreen.addEventListener('click', clickImg)
 
@@ -144,8 +144,8 @@ function handleSubmit(evt) {
 }
 
 const popupImgOpen = document.querySelector('.popup-img')
-const imgPopup = popupImgOpen.querySelector('.popup__img-img')
-const closePopupImg = popupImgOpen.querySelector('.popup__close-icon-img')
+const imgPopup = popupImgOpen.querySelector('.popup-img__img-img')
+const closePopupImg = popupImgOpen.querySelector('.popup-img__close-icon-img')
 
 closePopupImg.addEventListener('click', function() {
   popupImgOpen.classList.remove('popup_opened-img')

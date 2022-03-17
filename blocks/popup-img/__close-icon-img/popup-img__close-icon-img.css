@@ -1,22 +1,22 @@
-.popup__close-icon-img {
+.popup-img__close-icon-img {
   position: absolute;
   margin-left: 8px;
   margin-top: -40px;
   cursor: pointer;
 }
 
-.popup__close-icon-img:hover {
+.popup-img__close-icon-img:hover {
   opacity: .6;
 }
 
 @media screen and (max-width: 550px) {
-  .popup__close-icon-img {
+  .popup-img__close-icon-img {
     margin-left: -32px;
   }
 }
 
 @media screen and (max-width: 410px) {
-  .popup__close-icon-img {
+  .popup-img__close-icon-img {
     width: 20px;
     margin-left: -20px;
     margin-top: -36px;
