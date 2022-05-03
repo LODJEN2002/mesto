@@ -79,7 +79,7 @@ profileForm.addEventListener('submit', handleProfileFormSubmit);
 
 // Пробуем новое
 // Создаем элемент
-function renderItems(item) {
+function createCard(item) {
   const initialCardItem = cardTemplate.querySelector('.elements__element').cloneNode(true);
   const titleCard = initialCardItem.querySelector('.elements__title')
   const imgCard = initialCardItem.querySelector('.elements__mask-group')
@@ -108,7 +108,7 @@ function renderItems(item) {
 
   imgCard.addEventListener('click', clickImg)
 
-  function clickImg(){
+  function clickImg() {
     const img = item.link;
     openPopup(popupImgOpen);
     imgPopup.src = img;
@@ -119,14 +119,14 @@ function renderItems(item) {
   return initialCardItem
 }
 
-const renderItem = (item) => {
-  elements.prepend(renderItems(item));
+function renderItem(item) {
+  elements.prepend(createCard(item));
 }
 
 
-  initialCards.forEach((item) => {
-    renderItem(item);
-  });
+initialCards.forEach((item) => {
+  renderItem(item);
+});
 
 //Провели по массиву
 
