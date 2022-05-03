@@ -21,6 +21,8 @@
                     <button class="profile__add-button" type="button"></button>
             </section>
             <section class="elements">
+              
+            </section>
               <template class="card-template">
                 <article class="elements__element">
                     <img class="elements__mask-group" alt="Карачаевск" />
@@ -31,34 +33,33 @@
                     </div>
                 </article>
               </template>
-            </section>
         </main>
         <footer class="footer">
             <p class="footer__mesto">© 2020 Mesto Russia</p>
         </footer>
-        <div class="popup">
+        <div class="popup profile-popup">
             <div class="popup__container">
                 <img class="popup__close-icon" src="images/Close-Icon.svg" alt="Закрытие" />
                 <h2 class="popup__container-title">Редактировать профиль</h2>
-                <form class="popup__form" name="field-title">
-                    <input type="text" name="field-text-title" class="popup__container-field-title" value="Жак-Ив Кусто" />
-                    <input type="text" name="field-text-subtitle" class="popup__container-field-subtitle" value="Исследователь океана" />
+                <form class="popup__form" name="field-profile">
+                    <input class="popup__input popup__input_field_title" type="text" name="field-text-title" value="Жак-Ив Кусто" />
+                    <input class="popup__input popup__input_field_subtitle" type="text" name="field-text-subtitle" value="Исследователь океана" />
                     <button class="popup__container-save" type="submit">Сохранить</button>
                 </form>
             </div>
         </div>
-        <div class="popup-cards">
+        <div class="popup popup-cards">
             <div class="popup-cards__container-plus">
-                <img class="popup-cards__close-icon-pluse" src="images/Close-Icon.svg" alt="Закрытие" />
+                <img class="popup__close-icon" src="images/Close-Icon.svg" alt="Закрытие" />
                 <h2 class="popup-cards__container-title">Новое место</h2>
-                <form class="popup-cards__form-plus" name="field-title">
-                    <input type="text" name="field-text-title" class="popup-cards__container-field-title-plus"  placeholder="Название" />
-                    <input type="text" name="field-text-subtitle" class="popup-cards__container-field-subtitle-plus" placeholder="Ссылка на картинку" />
+                <form class="popup__form" name="field-cards">
+                    <input class="popup__input popup-cards__container-field-title-plus" type="text" name="field-text-title"  placeholder="Название" />
+                    <input class="popup__input popup-cards__container-field-subtitle-plus" type="text" name="field-text-subtitle" placeholder="Ссылка на картинку" />
                     <button class="popup-cards__container-save-plus" type="submit">Сохранить</button>
                 </form>
             </div>
         </div>
-        <div class="popup-img">
+        <div class="popup popup-img">
           <div class="popup-img__container-img">
             <img class="popup-img__img-img" src="https://i.ytimg.com/vi/NKk6rGDpq6Y/sddefault.jpg" alt="картинка-фул-скрин">
             <img class="popup-img__close-icon-img" src="images/Close-Icon.svg" alt="Закрытие" />

@@ -1,4 +1,4 @@
-.popup__container-field-subtitle {
+.popup__input_field_subtitle {
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -13,13 +13,13 @@
 }
 
 @media screen and (max-width:460px) {
-  .popup__container-field-subtitle {
+  .popup__input_field_subtitle {
     min-width: 85%;
   }
 }
 
 @media screen and (max-width:320px) {
-  .popup__container-field-subtitle {
+  .popup__input_field_subtitle {
     min-width: 238px;
   }
 }
