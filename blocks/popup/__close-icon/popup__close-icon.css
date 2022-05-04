@@ -1,8 +1,9 @@
 .popup__close-icon {
   position: absolute;
   right: -40px;
-  top: -40px;
+  margin-top: -40px;
   cursor: pointer;
+  text-align: center;
 }
 
 .popup__close-icon:hover {
@@ -19,6 +20,5 @@
   .popup__close-icon {
     width: 20px;
     right: 0px;
-    top: -36px;
   }
 }

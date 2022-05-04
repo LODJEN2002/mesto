@@ -15,7 +15,8 @@ const inputLink = document.querySelector('.popup-cards__container-field-subtitle
 const elements = document.querySelector('.elements');
 const popupImgOpen = document.querySelector('.popup-img')
 const imgPopup = popupImgOpen.querySelector('.popup-img__img-img')
-const closePopupImg = popupImgOpen.querySelector('.popup-img__close-icon-img')
+const imgPopupCloseBtn = popupImgOpen.querySelector('.popup__close-icon')
+const popupImgText = document.querySelector('.popup-img__text');
 const cardTemplate = document.querySelector('.card-template').content;
 
 
@@ -102,10 +103,6 @@ function createCard(item) {
     evt.target.classList.toggle('elements__group-like')
   });
 
-  // Попап картинки
-
-  const popupImgText = document.querySelector('.popup-img__text');
-
   imgCard.addEventListener('click', clickImg)
 
   function clickImg() {
@@ -137,19 +134,17 @@ function handleCardFormSubmit(evt) {
     link: inputLink.value
   });
   closePopup(cardsPopup);
+  evt.target.reset()
 }
 
 cardForm.addEventListener('submit', handleCardFormSubmit);
 
-
-closePopupImg.addEventListener('click', function() {
+imgPopupCloseBtn.addEventListener('click', function() {
   closePopup(popupImgOpen);
 })
 
 buttonAdd.addEventListener('click', function() {
   openPopup(cardsPopup);
-  inputName.value = '';
-  inputLink.value = '';
 });
 
 cardsPopupCloseBtn.addEventListener('click', function(){

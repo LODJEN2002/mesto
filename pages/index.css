@@ -29,7 +29,6 @@
 @import "../blocks/popup-img/popup-img.css";
 @import "../blocks/popup/_opened/popup_opened.css";
 @import "../blocks/popup/__close-icon/popup__close-icon.css";
-@import "../blocks/popup-img/__close-icon-img/popup-img__close-icon-img.css";
 @import "../blocks/popup/__container/popup__container.css";
 @import "../blocks/popup-cards/__container-plus/popup-cards__container-plus.css";
 @import "../blocks/popup-img/__container-img/popup-img__container-img.css";
