@@ -39,7 +39,9 @@
 @import "../blocks/popup/__container-field-subtitle/popup__container-field-subtitle.css";
 @import "../blocks/popup-cards/__container-field-subtitle-plus/popup-cards__container-field-subtitle-plus.css";
 @import "../blocks/popup/__container-save/popup__container-save.css";
+@import "../blocks/popup/__container-save/popup__container-save-disabled.css";
 @import "../blocks/popup-cards/__container-save-plus/popup-cards__container-save-plus.css";
+@import "../blocks/popup-cards/__container-save-plus/popup-cards__container-save-plus-disabled.css";
 @import "../blocks/popup-img/__img-img/popup-img__img-img.css";
 @import "../blocks/popup-img/__text/popup-img__text.css";
 /*================== Popup ===================== */

@@ -55,6 +55,8 @@ function openProfilePopup() {
   openPopup(profilePopup);
   nameInput.value = nameTitle.textContent;
   jobInput.value = jobSubtitle.textContent;
+  profileButtonSave.removeAttribute('disabled')
+  profileButtonSave.classList.remove('popup__container-save-disabled')
 }
 
 editButton.addEventListener('click' , openProfilePopup);
@@ -150,3 +152,36 @@ buttonAdd.addEventListener('click', function() {
 cardsPopupCloseBtn.addEventListener('click', function(){
   closePopup(cardsPopup);
 });
+
+// Здесь я нахожу через цифры т.к через имя не получается, возможно проблема в дефисах,
+// Готов переделать, но не совсем понимаю как это можно сделать...
+const formProfile = document.forms[0]
+const inputProfileName = formProfile.elements[0]
+const inputProfileJob = formProfile.elements[1]
+const profileButtonSave = formProfile.elements[2]
+
+
+formProfile.addEventListener('input', function (evt) {
+  isValid = inputProfileName.value.length > 1 && inputProfileJob.value.length > 1
+  setSubmitButtonState(isValid, profileButtonSave ,'popup__container-save-disabled')
+})
+
+function setSubmitButtonState(isFormValid, button, disabledClass) {
+  if(isFormValid) {
+    button.removeAttribute('disabled')
+    button.classList.remove(disabledClass)
+  }else {
+    button.setAttribute('disabled', true)
+    button.classList.add(disabledClass)
+  }
+}
+
+const formCards = document.forms[1]
+const cardsButtonSave = formCards.elements[2]
+
+console.log(inputName)
+
+formCards.addEventListener('input', function (evt) {
+  isValid = inputName.value.length > 0 && inputLink.value.length > 0
+  setSubmitButtonState(isValid,cardsButtonSave ,'popup-cards__container-save-plus-disabled')
+})

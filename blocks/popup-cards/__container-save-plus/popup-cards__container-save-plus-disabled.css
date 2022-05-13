@@ -1,0 +1,8 @@
+.popup-cards__container-save-plus-disabled {
+  background-color: grey;
+  cursor: default;
+}
+
+.popup-cards__container-save-plus-disabled:hover {
+  opacity: 1;
+}

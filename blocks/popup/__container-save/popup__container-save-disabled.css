@@ -1,0 +1,8 @@
+.popup__container-save-disabled {
+  background-color: grey;
+  cursor: default;
+}
+
+.popup__container-save:hover {
+  opacity: 1;
+}
