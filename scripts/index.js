@@ -127,8 +127,6 @@ initialCards.forEach((item) => {
   renderItem(item);
 });
 
-//Провели по массиву
-
 function handleCardFormSubmit(evt) {
   evt.preventDefault();
   renderItem({
@@ -143,6 +141,17 @@ cardForm.addEventListener('submit', handleCardFormSubmit);
 
 imgPopupCloseBtn.addEventListener('click', function() {
   closePopup(popupImgOpen);
+})
+//Это выходи из попапа при клике на ост. область.
+popupImgOpen.addEventListener('click', function() {
+  closePopup(popupImgOpen)
+})
+//Escape закрытие
+// Kакой то странный код вышел, но вроде работает)
+window.addEventListener('keydown', function(event) {
+  if(event.key === 'Escape') {
+  closePopup(popupImgOpen) & closePopup(profilePopup) & closePopup(cardsPopup)
+  }
 })
 
 buttonAdd.addEventListener('click', function() {
@@ -178,8 +187,6 @@ function setSubmitButtonState(isFormValid, button, disabledClass) {
 
 const formCards = document.forms[1]
 const cardsButtonSave = formCards.elements[2]
-
-console.log(inputName)
 
 formCards.addEventListener('input', function (evt) {
   isValid = inputName.value.length > 0 && inputLink.value.length > 0
