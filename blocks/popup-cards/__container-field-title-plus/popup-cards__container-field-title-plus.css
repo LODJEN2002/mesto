@@ -9,6 +9,8 @@
   outline-color: lightblue;
   margin-top: 41px;
   padding: 13px 0 13px 0;
+  height: 14px;
+  margin-left: 36px;
 }
 
 @media screen and (max-width:460px) {

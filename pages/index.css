@@ -45,3 +45,24 @@
 @import "../blocks/popup-img/__img-img/popup-img__img-img.css";
 @import "../blocks/popup-img/__text/popup-img__text.css";
 /*================== Popup ===================== */
+
+
+.popup__input_type_error {
+  border-bottom-color: red;
+}
+
+.form-input-error {
+  visibility: hidden;
+  color: #FF0000;
+  font-size: 12px;
+  line-height: 14.52px;
+  font-weight: 400;
+  height: 12px;
+  max-width: 164px;
+  margin: 5px 0 0 36px;
+  text-align: left;
+}
+
+.popup__input_form_error {
+  visibility: visible;
+}

@@ -55,8 +55,6 @@ function openProfilePopup() {
   openPopup(profilePopup);
   nameInput.value = nameTitle.textContent;
   jobInput.value = jobSubtitle.textContent;
-  profileButtonSave.removeAttribute('disabled')
-  profileButtonSave.classList.remove('popup__container-save-disabled')
 }
 
 editButton.addEventListener('click' , openProfilePopup);
@@ -146,6 +144,7 @@ imgPopupCloseBtn.addEventListener('click', function() {
 popupImgOpen.addEventListener('click', function() {
   closePopup(popupImgOpen)
 })
+
 //Escape закрытие
 // Kакой то странный код вышел, но вроде работает)
 window.addEventListener('keydown', function(event) {
@@ -171,8 +170,8 @@ const profileButtonSave = formProfile.elements[2]
 
 
 formProfile.addEventListener('input', function (evt) {
-  isValid = inputProfileName.value.length > 1 && inputProfileJob.value.length > 1
-  setSubmitButtonState(isValid, profileButtonSave ,'popup__container-save-disabled')
+  buttonValid = inputProfileName.value.length > 1 && inputProfileJob.value.length > 1
+  setSubmitButtonState(buttonValid, profileButtonSave ,'popup__container-save-disabled')
 })
 
 function setSubmitButtonState(isFormValid, button, disabledClass) {
@@ -185,10 +184,57 @@ function setSubmitButtonState(isFormValid, button, disabledClass) {
   }
 }
 
-const formCards = document.forms[1]
+const formCards = document.forms.cards
 const cardsButtonSave = formCards.elements[2]
 
 formCards.addEventListener('input', function (evt) {
-  isValid = inputName.value.length > 0 && inputLink.value.length > 0
-  setSubmitButtonState(isValid,cardsButtonSave ,'popup-cards__container-save-plus-disabled')
+  buttonValid = inputName.value.length > 1 && inputLink.value.startsWith('https://')
+  setSubmitButtonState(buttonValid,cardsButtonSave ,'popup-cards__container-save-plus-disabled')
 })
+
+
+//Валидация
+const showInputError = (formElement, inputElement) => {
+  const formError = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.add('popup__input_type_error');
+  formError.classList.add('popup__input_form_error');
+  console.log(formError)
+}
+
+const hideInputError = (formElement, inputElement) => {
+  const formError = formElement.querySelector(`.${inputElement.id}-error`)
+  inputElement.classList.remove('popup__input_type_error')
+  formError.classList.remove('popup__input_form_error')
+}
+
+function isValid(formElement, inputElement) {
+  if(!inputElement.validity.valid) {
+    showInputError(formElement, inputElement);
+  }else {
+    hideInputError(formElement, inputElement)
+  }
+}
+
+
+const setEventListeners = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll('.popup__input'))
+
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener('input', () => {
+      isValid(formElement, inputElement)
+    })
+  })
+};
+
+
+const enableValidation = () => {
+  const formList = Array.from(document.querySelectorAll('.popup__form'))
+
+  formList.forEach((formElement) => {
+    formElement.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+    });
+    setEventListeners(formElement);
+  });
+};
+enableValidation()
