@@ -1,3 +1,14 @@
+const object = {
+  //форма и инпут
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  //Кнопочки)
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  // Ошибочки)
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+}
 
 // Здесь я нахожу через цифры т.к через имя не получается, возможно проблема в дефисах,
 // Готов переделать, но не совсем понимаю как это можно сделать...
@@ -32,56 +43,47 @@ formCards.addEventListener('input', function (evt) {
 
 
 //Валидация
-const showInputError = (formElement, inputElement) => {
+const showInputError = (formElement, inputElement, object) => {
   const formError = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add('popup__input_type_error');
+  inputElement.classList.add(object.inputErrorClass);
   formError.classList.add('popup__input_form_error');
 }
 
-const hideInputError = (formElement, inputElement) => {
+const hideInputError = (formElement, inputElement, object) => {
   const formError = formElement.querySelector(`.${inputElement.id}-error`)
-  inputElement.classList.remove('popup__input_type_error')
-  formError.classList.remove('popup__input_form_error')
+  inputElement.classList.remove(object.inputErrorClass)
+  formError.classList.remove('popup__input_form_error');
 }
 
-function isValid(formElement, inputElement) {
+function isValid(formElement, inputElement, object) {
   if(!inputElement.validity.valid) {
-    showInputError(formElement, inputElement);
+    showInputError(formElement, inputElement, object);
   }else {
-    hideInputError(formElement, inputElement)
+    hideInputError(formElement, inputElement, object)
   }
 }
 
 
-const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'))
+const setEventListeners = (formElement, object) => {
+  const inputList = Array.from(formElement.querySelectorAll(object.inputSelector))
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      isValid(formElement, inputElement)
+      isValid(formElement, inputElement, object)
     })
   })
 };
 
 
-const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll('.popup__form'))
+const enableValidation = (object) => {
+  const formList = Array.from(document.querySelectorAll(object.formSelector))
 
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
-    setEventListeners(formElement);
+    setEventListeners(formElement, object);
   });
 };
-enableValidation();
 
-
-const object = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-}
+enableValidation(object);
