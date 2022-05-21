@@ -148,12 +148,18 @@ imgPopupCloseBtn.addEventListener('click', function() {
   closePopup(popupImgOpen);
 })
 //Это выходи из попапа при клике на ост. область.
-popupImgOpen.addEventListener('click', function(evt) {
-  if(evt.target.classList.contains('popup-img')){
-    closePopup(popupImgOpen)
-  }
+const overlayClick = (popup, data) => {
+  popup.addEventListener('click', function(evt) {
+    if(evt.target.classList.contains(data)){
+      closePopup(popup)
+    }
+  })
+}
 
-})
+overlayClick(profilePopup, 'profile-popup');
+overlayClick(cardsPopup, 'popup-cards');
+overlayClick(popupImgOpen, 'popup-img');
+
 
 buttonAdd.addEventListener('click', function() {
   openPopup(cardsPopup);
