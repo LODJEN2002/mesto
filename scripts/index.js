@@ -19,6 +19,8 @@ const imgPopupCloseBtn = popupImgOpen.querySelector('.popup__close-icon')
 const popupImgText = document.querySelector('.popup-img__text');
 const cardTemplate = document.querySelector('.card-template').content;
 const saveButton = cardsPopup.querySelector('.popup__button')
+const spanTitleError = document.querySelector('.title-input-error')
+const spanSubtitleError = document.querySelector('.subtitle-input-error')
 const initialCards = [
   {
     name: 'Архыз',
@@ -54,6 +56,10 @@ function openProfilePopup() {
   openPopup(profilePopup);
   nameInput.value = nameTitle.textContent;
   jobInput.value = jobSubtitle.textContent;
+  spanTitleError.classList.remove('popup__error_visible')
+  spanSubtitleError.classList.remove('popup__error_visible')
+  nameInput.classList.remove('popup__input_type_error')
+  jobInput.classList.remove('popup__input_type_error')
 }
 
 editButton.addEventListener('click' , openProfilePopup);
