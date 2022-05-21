@@ -141,8 +141,11 @@ imgPopupCloseBtn.addEventListener('click', function() {
   closePopup(popupImgOpen);
 })
 //Это выходи из попапа при клике на ост. область.
-popupImgOpen.addEventListener('click', function() {
-  closePopup(popupImgOpen)
+popupImgOpen.addEventListener('click', function(evt) {
+  if(evt.target.classList.contains('popup-img')){
+    closePopup(popupImgOpen)
+  }
+
 })
 
 buttonAdd.addEventListener('click', function() {
