@@ -14,13 +14,13 @@ const obj = {
 const showInputError = (formElement, inputElement, obj) => {
   const formError = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(obj.inputErrorClass);
-  formError.classList.add('popup__input_form_error');
+  formError.classList.add(obj.errorClass);
 }
 
 const hideInputError = (formElement, inputElement, obj) => {
   const formError = formElement.querySelector(`.${inputElement.id}-error`)
   inputElement.classList.remove(obj.inputErrorClass)
-  formError.classList.remove('popup__input_form_error');
+  formError.classList.remove(obj.errorClass);
 }
 
 function isValid(formElement, inputElement, obj) {

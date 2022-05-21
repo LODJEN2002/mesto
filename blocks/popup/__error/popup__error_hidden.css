@@ -1,0 +1,11 @@
+.popup__error_hidden {
+  visibility: hidden;
+  color: #FF0000;
+  font-size: 12px;
+  line-height: 14.52px;
+  font-weight: 400;
+  height: 12px;
+  max-width: 164px;
+  margin: 5px 0 0 36px;
+  text-align: left;
+}
