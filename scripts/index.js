@@ -18,8 +18,7 @@ const imgPopup = popupImgOpen.querySelector('.popup-img__img-img')
 const imgPopupCloseBtn = popupImgOpen.querySelector('.popup__close-icon')
 const popupImgText = document.querySelector('.popup-img__text');
 const cardTemplate = document.querySelector('.card-template').content;
-
-
+const saveButton = cardsPopup.querySelector('.popup__button')
 const initialCards = [
   {
     name: 'Архыз',
@@ -133,6 +132,8 @@ function handleCardFormSubmit(evt) {
   });
   closePopup(cardsPopup);
   evt.target.reset()
+  saveButton.setAttribute('disabled', true)
+  saveButton.classList.add('popup__button_disabled')
 }
 
 cardForm.addEventListener('submit', handleCardFormSubmit);
