@@ -10,23 +10,25 @@ const enableValidationObj = {
   errorClass: 'popup__error_visible'
 }
 //Валидация
-const showInputError = (formElement, inputElement, enableValidationObj) => {
+const showInputError = (formElement, inputElement, enableValidationObj, errorMessage) => {
   const formError = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(enableValidationObj.inputErrorClass);
+  formError.textContent = errorMessage;
   formError.classList.add(enableValidationObj.errorClass);
 }
 
-const hideInputError = (formElement, inputElement, enableValidationObj) => {
+const hideInputError = (formElement, inputElement, enableValidationObj, errorMessage) => {
   const formError = formElement.querySelector(`.${inputElement.id}-error`)
   inputElement.classList.remove(enableValidationObj.inputErrorClass)
+  formError.textContent = ''
   formError.classList.remove(enableValidationObj.errorClass);
 }
 
 function isValid(formElement, inputElement, enableValidationObj) {
   if(!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, enableValidationObj);
+    showInputError(formElement, inputElement, enableValidationObj, inputElement.validationMessage);
   }else {
-    hideInputError(formElement, inputElement, enableValidationObj)
+    hideInputError(formElement, inputElement, enableValidationObj, inputElement.validationMessage)
   }
 }
 
