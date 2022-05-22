@@ -42,11 +42,11 @@
                 <img class="popup__close-icon" src="images/Close-Icon.svg" alt="Закрытие" />
                 <h2 class="popup__container-title">Редактировать профиль</h2>
                 <form class="popup__form" name="field-profile">
-                    <input id="title-input" class="popup__input popup__input_field_title" type="text" name="field-text-title" value="Жак-Ив Кусто" minlength="2" maxlength="30" required />
-                    <span class="title-input-error popup__error-hidden">Вы пропустили это поле.</span>
-                    <input id="subtitle-input" class="popup__input popup__input_field_subtitle" type="text" name="field-text-subtitle" value="Исследователь океана" minlength="2" maxlength="30" required  />
-                    <span class="subtitle-input-error popup__error-hidden">Вы пропустили это поле.</span>
-                    <button class="popup__button popup__button_disabled" type="submit" disabled>Сохранить</button>
+                    <input id="title-input" class="popup__input popup__input_field_title" type="text" name="field-text-title" value="Жак-Ив Кусто" placeholder="Имя" minlength="2" maxlength="40" required />
+                    <span class="title-input-error popup__error-hidden"></span>
+                    <input id="subtitle-input" class="popup__input popup__input_field_subtitle" type="text" name="field-text-subtitle" value="Исследователь океана" placeholder="Профессиональная деятельность" minlength="2" maxlength="200" required  />
+                    <span class="subtitle-input-error popup__error-hidden"></span>
+                    <button class="popup__button popup__button_disabled" type="submit" >Сохранить</button>
                 </form>
             </div>
         </div>
@@ -54,12 +54,12 @@
             <div class="popup-cards__container-plus">
                 <img class="popup__close-icon" src="images/Close-Icon.svg" alt="Закрытие" />
                 <h2 class="popup-cards__container-title">Новое место</h2>
-                <form class="popup__form" name="cards" novalidate>
+                <form class="popup__form" name="cards">
                     <input id="name-input" class="popup__input popup-cards__container-field-title-plus" type="text" name="field-text-title"  placeholder="Название" minlength="2" maxlength="30" required />
-                    <span class="name-input-error popup__error-hidden">Вы пропустили это поле.</span>
+                    <span class="name-input-error popup__error-hidden"></span>
                     <input id="link-input" class="popup__input popup-cards__container-field-subtitle-plus" type="url" name="field-text-subtitle" placeholder="Ссылка на картинку" required />
-                    <span class="link-input-error popup__error-hidden">Вы пропустили это поле.</span>
-                    <button class="popup__button popup__button_disabled" type="submit" disabled>Сохранить</button>
+                    <span class="link-input-error popup__error-hidden"></span>
+                    <button class="popup__button popup__button_disabled" type="submit">Сохранить</button>
                 </form>
             </div>
         </div>

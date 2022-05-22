@@ -1,4 +1,4 @@
-const obj = {
+const enableValidationObj = {
   //форма и инпут
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -9,52 +9,51 @@ const obj = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
 }
-
 //Валидация
-const showInputError = (formElement, inputElement, obj) => {
+const showInputError = (formElement, inputElement, enableValidationObj) => {
   const formError = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add(obj.inputErrorClass);
-  formError.classList.add(obj.errorClass);
+  inputElement.classList.add(enableValidationObj.inputErrorClass);
+  formError.classList.add(enableValidationObj.errorClass);
 }
 
-const hideInputError = (formElement, inputElement, obj) => {
+const hideInputError = (formElement, inputElement, enableValidationObj) => {
   const formError = formElement.querySelector(`.${inputElement.id}-error`)
-  inputElement.classList.remove(obj.inputErrorClass)
-  formError.classList.remove(obj.errorClass);
+  inputElement.classList.remove(enableValidationObj.inputErrorClass)
+  formError.classList.remove(enableValidationObj.errorClass);
 }
 
-function isValid(formElement, inputElement, obj) {
+function isValid(formElement, inputElement, enableValidationObj) {
   if(!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, obj);
+    showInputError(formElement, inputElement, enableValidationObj);
   }else {
-    hideInputError(formElement, inputElement, obj)
+    hideInputError(formElement, inputElement, enableValidationObj)
   }
 }
 
 
-const setEventListeners = (formElement, obj) => {
-  const inputList = Array.from(formElement.querySelectorAll(obj.inputSelector))
+const setEventListeners = (formElement, enableValidationObj) => {
+  const inputList = Array.from(formElement.querySelectorAll(enableValidationObj.inputSelector))
 
-  const buttonElement = formElement.querySelector(obj.submitButtonSelector)
+  const buttonElement = formElement.querySelector(enableValidationObj.submitButtonSelector)
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      isValid(formElement, inputElement, obj);
+      isValid(formElement, inputElement, enableValidationObj);
 
-      toggleButtonState(inputList, buttonElement, obj)
+      toggleButtonState(inputList, buttonElement, enableValidationObj)
     })
   })
 };
 
 
-const enableValidation = (obj) => {
-  const formList = Array.from(document.querySelectorAll(obj.formSelector))
+const enableValidation = (enableValidationObj) => {
+  const formList = Array.from(document.querySelectorAll(enableValidationObj.formSelector))
 
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
-    setEventListeners(formElement, obj);
+    setEventListeners(formElement, enableValidationObj);
   });
 };
 
@@ -64,14 +63,14 @@ const hasInvalidInput = (inputList) => {
   })
 }
 
-const toggleButtonState = (inputList, buttonElement, obj) => {
+const toggleButtonState = (inputList, buttonElement, enableValidationObj) => {
   if(hasInvalidInput(inputList)) {
-    buttonElement.setAttribute('disabled', true)
-    buttonElement.classList.add(obj.inactiveButtonClass)
+    // buttonElement.setAttribute('disabled', true)
+    buttonElement.classList.add(enableValidationObj.inactiveButtonClass)
   }else {
-    buttonElement.removeAttribute('disabled')
-    buttonElement.classList.remove(obj.inactiveButtonClass)
+    // buttonElement.removeAttribute('disabled')
+    buttonElement.classList.remove(enableValidationObj.inactiveButtonClass)
   }
 }
 
-enableValidation(obj);
+enableValidation(enableValidationObj);

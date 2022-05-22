@@ -12,7 +12,7 @@ const cardsPopupCloseBtn = cardsPopup.querySelector('.popup__close-icon')
 const cardForm = cardsPopup.querySelector('.popup__form')
 const inputName = document.querySelector('.popup-cards__container-field-title-plus');
 const inputLink = document.querySelector('.popup-cards__container-field-subtitle-plus');
-const elements = document.querySelector('.elements');
+const cardElements = document.querySelector('.elements');
 const popupImgOpen = document.querySelector('.popup-img')
 const imgPopup = popupImgOpen.querySelector('.popup-img__img-img')
 const imgPopupCloseBtn = popupImgOpen.querySelector('.popup__close-icon')
@@ -50,49 +50,40 @@ const initialCards = [
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', handleEscClose)
+}
+
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', handleEscClose)
 }
 
 function openProfilePopup() {
   openPopup(profilePopup);
   nameInput.value = nameTitle.textContent;
   jobInput.value = jobSubtitle.textContent;
-  spanTitleError.classList.remove('popup__error_visible')
-  spanSubtitleError.classList.remove('popup__error_visible')
-  nameInput.classList.remove('popup__input_type_error')
-  jobInput.classList.remove('popup__input_type_error')
 }
 
 editButton.addEventListener('click' , openProfilePopup);
-
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-}
-
-function closeProfilePopup() {
-  closePopup(profilePopup);
-}
-
-profileCloseButton.addEventListener('click' , closeProfilePopup);
 
 function handleProfileFormSubmit (evt) {
   evt.preventDefault();
   nameTitle.textContent = nameInput.value;
   jobSubtitle.textContent = jobInput.value;
-  closeProfilePopup()
+  closePopup(profilePopup)
 }
 
 profileForm.addEventListener('submit', handleProfileFormSubmit);
 
-// Пробуем новое
 // Создаем элемент
-function createCard(item) {
+function createCard(initialCardsArr) {
   const initialCardItem = cardTemplate.querySelector('.elements__element').cloneNode(true);
   const titleCard = initialCardItem.querySelector('.elements__title')
   const imgCard = initialCardItem.querySelector('.elements__mask-group')
 
-  titleCard.textContent = item.name;
-  imgCard.src = item.link;
-  imgCard.alt = item.name;
+  titleCard.textContent = initialCardsArr.name;
+  imgCard.src = initialCardsArr.link;
+  imgCard.alt = initialCardsArr.name;
 
   // Удаление карточки
   const trashElement = initialCardItem.querySelector('.elements__trash')
@@ -111,23 +102,23 @@ function createCard(item) {
   imgCard.addEventListener('click', clickImg)
 
   function clickImg() {
-    const img = item.link;
+    const img = initialCardsArr.link;
     openPopup(popupImgOpen);
     imgPopup.src = img;
-    popupImgText.textContent = item.name
-    imgPopup.alt = item.name;
+    popupImgText.textContent = initialCardsArr.name
+    imgPopup.alt = initialCardsArr.name;
   }
 
   return initialCardItem
 }
 
-function renderItem(item) {
-  elements.prepend(createCard(item));
+function renderItem(initialCardsArr) {
+  cardElements.prepend(createCard(initialCardsArr));
 }
 
 
-initialCards.forEach((item) => {
-  renderItem(item);
+initialCards.forEach((initialCardsArr) => {
+  renderItem(initialCardsArr);
 });
 
 function handleCardFormSubmit(evt) {
@@ -138,18 +129,18 @@ function handleCardFormSubmit(evt) {
   });
   closePopup(cardsPopup);
   evt.target.reset()
-  saveButton.setAttribute('disabled', true)
+  // saveButton.setAttribute('disabled', true)
   saveButton.classList.add('popup__button_disabled')
 }
 
 cardForm.addEventListener('submit', handleCardFormSubmit);
 
-imgPopupCloseBtn.addEventListener('click', function() {
-  closePopup(popupImgOpen);
-})
-//Это выходи из попапа при клике на ост. область.
-const overlayClick = (popup, data) => {
-  popup.addEventListener('click', function(evt) {
+//Это выходи из попапа при клике на overlay
+/** Используется mousedown т.к. при выделение всего текста в инпутах мой курсос
+ *входит в область оверлея и срабатывает клик на оверлее и закрытие попапа
+ */
+function overlayClick(popup, data) {
+  popup.addEventListener('mousedown', function(evt) {
     if(evt.target.classList.contains(data)){
       closePopup(popup)
     }
@@ -160,19 +151,26 @@ overlayClick(profilePopup, 'profile-popup');
 overlayClick(cardsPopup, 'popup-cards');
 overlayClick(popupImgOpen, 'popup-img');
 
+//Escape закрытие
+// Kакой то странный код вышел, но вроде работает)
+function handleEscClose(evt) {
+  if(event.key === 'Escape') {
+    closePopup(profilePopup) & closePopup(popupImgOpen) & closePopup(cardsPopup)
+  }
+}
 
 buttonAdd.addEventListener('click', function() {
   openPopup(cardsPopup);
 });
 
-cardsPopupCloseBtn.addEventListener('click', function(){
-  closePopup(cardsPopup);
+profileCloseButton.addEventListener('click' , function() {
+  closePopup(profilePopup)
 });
 
-//Escape закрытие
-// Kакой то странный код вышел, но вроде работает)
-window.addEventListener('keydown', function(event) {
-  if(event.key === 'Escape') {
-  closePopup(popupImgOpen) & closePopup(profilePopup) & closePopup(cardsPopup)
-  }
+imgPopupCloseBtn.addEventListener('click', function() {
+  closePopup(popupImgOpen);
 })
+
+cardsPopupCloseBtn.addEventListener('click', function() {
+  closePopup(cardsPopup);
+});
