@@ -17,7 +17,7 @@ const showInputError = (formElement, inputElement, enableValidationObj, errorMes
   formError.classList.add(enableValidationObj.errorClass);
 }
 
-const hideInputError = (formElement, inputElement, enableValidationObj, errorMessage) => {
+const hideInputError = (formElement, inputElement, enableValidationObj) => {
   const formError = formElement.querySelector(`.${inputElement.id}-error`)
   inputElement.classList.remove(enableValidationObj.inputErrorClass)
   formError.textContent = ''
@@ -28,7 +28,7 @@ function isValid(formElement, inputElement, enableValidationObj) {
   if(!inputElement.validity.valid) {
     showInputError(formElement, inputElement, enableValidationObj, inputElement.validationMessage);
   }else {
-    hideInputError(formElement, inputElement, enableValidationObj, inputElement.validationMessage)
+    hideInputError(formElement, inputElement, enableValidationObj)
   }
 }
 
