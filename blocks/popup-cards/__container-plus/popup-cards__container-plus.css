@@ -1,6 +1,5 @@
 .popup-cards__container-plus {
-  max-width: 430px;
-  max-height: 330px;
+  width: 430px;
   background-color: white;
   color:black;
   z-index: 2;

@@ -21,6 +21,7 @@ const cardTemplate = document.querySelector('.card-template').content;
 const saveButton = cardsPopup.querySelector('.popup__button')
 const spanTitleError = document.querySelector('.title-input-error')
 const spanSubtitleError = document.querySelector('.subtitle-input-error')
+const popupList = Array.from(document.querySelectorAll('.popup'))
 const initialCards = [
   {
     name: 'Архыз',
@@ -129,7 +130,6 @@ function handleCardFormSubmit(evt) {
   });
   closePopup(cardsPopup);
   evt.target.reset()
-  // saveButton.setAttribute('disabled', true)
   saveButton.classList.add('popup__button_disabled')
 }
 
@@ -139,23 +139,23 @@ cardForm.addEventListener('submit', handleCardFormSubmit);
 /** Используется mousedown т.к. при выделение всего текста в инпутах мой курсос
  *входит в область оверлея и срабатывает клик на оверлее и закрытие попапа
  */
-function overlayClick(popup, data) {
-  popup.addEventListener('mousedown', function(evt) {
-    if(evt.target.classList.contains(data)){
-      closePopup(popup)
-    }
-  })
-}
+ function overlayClick(evt) {
+     if(evt.target.classList.contains('popup_opened')){
+       const popup = document.querySelector('.popup_opened')
+       closePopup(popup)
+     }
+   }
 
-overlayClick(profilePopup, 'profile-popup');
-overlayClick(cardsPopup, 'popup-cards');
-overlayClick(popupImgOpen, 'popup-img');
+popupList.forEach((popup) => {
+  popup.addEventListener('mousedown', overlayClick)
+})
+
 
 //Escape закрытие
-// Kакой то странный код вышел, но вроде работает)
 function handleEscClose(evt) {
   if(event.key === 'Escape') {
-    closePopup(profilePopup) & closePopup(popupImgOpen) & closePopup(cardsPopup)
+    const popupActive = document.querySelector('.popup_opened')
+    closePopup(popupActive)
   }
 }
 
