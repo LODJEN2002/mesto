@@ -45,6 +45,5 @@
 @import "../blocks/popup/__error/popup__error-hidden.css";
 @import "../blocks/popup/__error/popup__error_visible.css";
 @import "../blocks/popup/__input/popup__input_type_error.css";
-@import "../blocks/popup/__form_container/popup__form_container.css";
-@import "../blocks/popup/__span_subtitle/popup__span_subtitle.css";
+@import "../blocks/popup/__error/popup__error-subtitle.css";
 /*================== Popup ===================== */
