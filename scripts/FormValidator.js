@@ -1,18 +1,5 @@
-export { enableValidationObj, FormValidatorTest }
-
-const enableValidationObj = {
-  //Форма и инпут
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  //Кнопки)
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  // Ошибки)
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-}
-
-class FormValidatorTest {
+import { validationConfig as enableValidationObj } from './utils.js'
+export class FormValidator {
   constructor(enableValidationObj, formElement) {
     this._formElement = formElement
     this._inputElement = this._formElement.querySelector(enableValidationObj.inputSelector)

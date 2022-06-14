@@ -1,5 +1,8 @@
-import { enableValidationObj, FormValidatorTest as FormValidator } from './FormValidator.js'
-import { initialCards, Card } from './Card.js'
+import { FormValidator } from './FormValidator.js'
+import { Card } from './Card.js'
+import { validationConfig } from './utils.js'
+import { initialCards } from './utils.js'
+
 
 const editButton = document.querySelector('.profile__edit-button'); // Кнопка изменения
 const profileCloseButton = document.querySelector('.popup__close-icon') // Кнопка закрытия поп-ап
@@ -54,23 +57,27 @@ function handleProfileFormSubmit (evt) {
 
 profileForm.addEventListener('submit', handleProfileFormSubmit);
 
+function createCard(item) {
+  const newCard = new Card(item, '.card-template');
+  const cardElement = newCard.generateCard();
+
+  return cardElement;
+}
+
+
 
 initialCards.forEach((item) => {
-  const card = new Card(item);
-  const cardElement = card.generateCard();
+  createCard(item)
 
-  cardElements.prepend(cardElement);
-
+  cardElements.prepend(createCard(item));
 })
 
 function handleCardFormSubmit(evt) {
   evt.preventDefault();
-  const newCard = new Card({
+  cardElements.prepend(createCard({
     name: inputName.value,
     link: inputLink.value
-  })
-  const newCardVisable = newCard.generateCard()
-  cardElements.prepend(newCardVisable);
+  }));
   closePopup(cardsPopup);
   evt.target.reset()
   saveButton.classList.add('popup__button_disabled')
@@ -120,8 +127,8 @@ cardsPopupCloseBtn.addEventListener('click', function() {
 
 
 
-const profileFormValid = new FormValidator(enableValidationObj, profileForm);
-const cardFormValid = new FormValidator(enableValidationObj, cardForm);
+const profileFormValid = new FormValidator(validationConfig, profileForm);
+const cardFormValid = new FormValidator(validationConfig, cardForm);
 
-const validytyProfile = profileFormValid.enableValidation();
-const validytyCard = cardFormValid.enableValidation();
+profileFormValid.enableValidation();
+cardFormValid.enableValidation();
