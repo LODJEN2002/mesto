@@ -2,7 +2,11 @@ import { FormValidator } from './FormValidator.js'
 import { Card } from './Card.js'
 import { validationConfig } from './utils.js'
 import { initialCards } from './utils.js'
-
+import { Section } from './Section.js'
+import { Popup } from './Popup.js'
+import { PopupWithImage } from './PopupWithImage.js'
+import { PopupWithForm } from './PopupWithForm.js'
+import { UserInfo } from './UserInfo.js'
 
 const editButton = document.querySelector('.profile__edit-button'); // Кнопка изменения
 const profileCloseButton = document.querySelector('.popup__close-icon') // Кнопка закрытия поп-ап
@@ -24,111 +28,77 @@ const imgPopup = popupImgOpen.querySelector('.popup-img__img-img')
 const imgPopupCloseBtn = popupImgOpen.querySelector('.popup__close-icon')
 const popupImgText = document.querySelector('.popup-img__text');
 const cardTemplate = document.querySelector('.card-template').content;
-const saveButton = cardsPopup.querySelector('.popup__button')
-const spanTitleError = document.querySelector('.title-input-error')
-const spanSubtitleError = document.querySelector('.subtitle-input-error')
-const popupList = Array.from(document.querySelectorAll('.popup'))
+const saveButton = cardsPopup.querySelector('.popup__button');
+const spanTitleError = document.querySelector('.title-input-error');
+const spanSubtitleError = document.querySelector('.subtitle-input-error');
+const popupList = Array.from(document.querySelectorAll('.popup'));
+const imgMask = document.querySelector('.elements__element');
+const profilePopupClass = new Popup('.profile-popup');
+const cardsPopupClass = new Popup('.popup-cards');
+const imgClick = new PopupWithImage('.popup-img')
+const newInfo = new UserInfo({ selectorName: '.profile__info-text-title' , selectorJob: '.profile__info-text-subtitle' })
 
-
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', handleEscClose)
-}
-
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', handleEscClose)
-}
+imgClick.setEventListeners()
 
 function openProfilePopup() {
-  openPopup(profilePopup);
-  nameInput.value = nameTitle.textContent;
-  jobInput.value = jobSubtitle.textContent;
+  const { name , job } = newInfo.getUserInfo()
+  nameInput.value = name;
+  jobInput.value = job;
+  profilePopupClass.open()
 }
 
 editButton.addEventListener('click' , openProfilePopup);
 
-function handleProfileFormSubmit (evt) {
-  evt.preventDefault();
-  nameTitle.textContent = nameInput.value;
-  jobSubtitle.textContent = jobInput.value;
-  closePopup(profilePopup)
+const profilePopupSubmit = new PopupWithForm('.profile-popup', handleProfileFormSubmit)
+
+profilePopupSubmit.setEventListeners()
+
+function handleProfileFormSubmit (data) {
+  const { name , job } = data
+  newInfo.setUserInfo(name , job)
+  profilePopupSubmit.close()
+
 }
 
-profileForm.addEventListener('submit', handleProfileFormSubmit);
-
 function createCard(item) {
-  const newCard = new Card(item, '.card-template');
+  const newCard = new Card(item, '.card-template', () => {
+    imgClick.open(item.name, item.link)
+  });
   const cardElement = newCard.generateCard();
 
   return cardElement;
 }
 
+const cardsPopupSubmit = new PopupWithForm('.popup-cards', handleCardFormSubmit);
 
+cardsPopupSubmit.setEventListeners();
 
-initialCards.forEach((item) => {
-  createCard(item)
-
-  cardElements.prepend(createCard(item));
-})
-
-function handleCardFormSubmit(evt) {
-  evt.preventDefault();
-  cardElements.prepend(createCard({
-    name: inputName.value,
-    link: inputLink.value
-  }));
-  closePopup(cardsPopup);
-  evt.target.reset()
+function handleCardFormSubmit(data) {
+  const card = createCard({
+    name: data['field-text-title'],
+    link: data['field-text-subtitle']
+  })
+  section.addItem(card)
+  cardsPopupSubmit.close();
   saveButton.classList.add('popup__button_disabled')
 }
 
-cardForm.addEventListener('submit', handleCardFormSubmit);
-
-//Это выходи из попапа при клике на overlay
-/** Используется mousedown т.к. при выделение всего текста в инпутах мой курсос
- *входит в область оверлея и срабатывает клик на оверлее и закрытие попапа
- */
- function overlayClick(evt) {
-     if(evt.target.classList.contains('popup_opened')){
-       const popup = document.querySelector('.popup_opened')
-       closePopup(popup)
-     }
-   }
-
-popupList.forEach((popup) => {
-  popup.addEventListener('mousedown', overlayClick)
-})
-
-
-//Escape закрытие
-function handleEscClose(event) {
-  if(event.key === 'Escape') {
-    const popupActive = document.querySelector('.popup_opened')
-    closePopup(popupActive)
-  }
-}
-
 buttonAdd.addEventListener('click', function() {
-  openPopup(cardsPopup);
+  cardsPopupClass.open();
 });
 
-profileCloseButton.addEventListener('click' , function() {
-  closePopup(profilePopup)
-});
 
 imgPopupCloseBtn.addEventListener('click', function() {
-  closePopup(popupImgOpen);
+  imgClick.close();
 })
-
-cardsPopupCloseBtn.addEventListener('click', function() {
-  closePopup(cardsPopup);
-});
-
-
 
 const profileFormValid = new FormValidator(validationConfig, profileForm);
 const cardFormValid = new FormValidator(validationConfig, cardForm);
 
 profileFormValid.enableValidation();
 cardFormValid.enableValidation();
+
+const section = new Section({ items: initialCards, renderer: createCard }, '.elements')
+
+section.renderItem()
+

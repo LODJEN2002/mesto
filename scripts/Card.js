@@ -16,10 +16,11 @@ function closePopup(popup) {
 // По другому сделать не вышло совсем....
 
 export class Card {
-    constructor(cardData, cardSelector) {
+    constructor(cardData, cardSelector, handleImageClick) {
       this.name = cardData.name;
       this.link = cardData.link;
-      this.cardSelector = cardSelector
+      this.cardSelector = cardSelector;
+      this._handleImageClick = handleImageClick;
     }
   
     _getTemplate() {
@@ -37,6 +38,7 @@ export class Card {
       this._element.querySelector('.elements__mask-group').src = this.link;
       this._element.querySelector('.elements__mask-group').alt = this.name
       return this._element;
+
     }
   
     _setEventListeners() {
@@ -52,15 +54,8 @@ export class Card {
   
       this._element.querySelector('.elements__mask-group')
       .addEventListener('click', () => {
-        this._handleClickImg();
-      })
-      
-      // document.addEventListener('keydown' , (e) => {
-      //   if(e.key === 'Escape') {
-      //     this._closePopup();
-      //   }
-      // })
-      
+        this._handleImageClick();
+      })      
     }
   
     _handleLikeClick() {
@@ -73,11 +68,44 @@ export class Card {
       .closest('.elements__element').remove()
     }
 
-    _handleClickImg() {
-      popupImgOpen.classList.add('popup_opened');
-      document.addEventListener('keydown', handleEscClose)
-      imgPopup.src = this.link;
-      popupImgText.textContent = this.name
-      imgPopup.alt = this.name;
-    }
+    // _handleClickImg() {
+    //   popupImgOpen.classList.add('popup_opened');
+    //   document.addEventListener('keydown', handleEscClose)
+    //   imgPopup.src = this.link;
+    //   popupImgText.textContent = this.name
+    //   imgPopup.alt = this.name;
+    // }
   }
+
+  
+  
+
+
+  
+  
+
+
+  
+  
+
+
+  
+  
+
+
+  
+  
+
+
+  
+  
+
+
+  
+  
+
+
+  
+  
+
+
