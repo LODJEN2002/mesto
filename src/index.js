@@ -1,5 +1,12 @@
 import './styles/index.css'; // добавьте импорт главного файла стилей 
-import { validationConfig , initialCards } from './utils.js'
+import { editButton,
+  profileForm,
+  nameInput,
+  jobInput,
+  buttonAdd,
+  cardForm,
+  imgPopupCloseBtn,
+  validationConfig , initialCards } from './utils.js'
 import { Card } from './Card.js'
 import { FormValidator } from './FormValidator.js'
 import { Section } from './Section.js'
@@ -8,31 +15,6 @@ import { PopupWithImage } from './PopupWithImage.js'
 import { PopupWithForm } from './PopupWithForm.js'
 import { UserInfo } from './UserInfo.js'
 
-const editButton = document.querySelector('.profile__edit-button'); // Кнопка изменения
-const profileCloseButton = document.querySelector('.popup__close-icon') // Кнопка закрытия поп-ап
-const profileForm = document.querySelector('.popup__form') // На изменение профиля
-const nameInput = document.querySelector('.popup__input_field_title');
-const jobInput = document.querySelector('.popup__input_field_subtitle');
-const profilePopup = document.querySelector('.profile-popup');
-const nameTitle = document.querySelector('.profile__info-text-title');
-const jobSubtitle = document.querySelector('.profile__info-text-subtitle');
-const buttonAdd = document.querySelector('.profile__add-button')
-const cardsPopup  = document.querySelector('.popup-cards')
-const cardsPopupCloseBtn = cardsPopup.querySelector('.popup__close-icon')
-const cardForm = cardsPopup.querySelector('.popup__form')
-const inputName = document.querySelector('.popup-cards__container-field-title-plus');
-const inputLink = document.querySelector('.popup-cards__container-field-subtitle-plus');
-const cardElements = document.querySelector('.elements');
-const popupImgOpen = document.querySelector('.popup-img')
-const imgPopup = popupImgOpen.querySelector('.popup-img__img-img')
-const imgPopupCloseBtn = popupImgOpen.querySelector('.popup__close-icon')
-const popupImgText = document.querySelector('.popup-img__text');
-const cardTemplate = document.querySelector('.card-template').content;
-const saveButton = cardsPopup.querySelector('.popup__button');
-const spanTitleError = document.querySelector('.title-input-error');
-const spanSubtitleError = document.querySelector('.subtitle-input-error');
-const popupList = Array.from(document.querySelectorAll('.popup'));
-const imgMask = document.querySelector('.elements__element');
 const profilePopupClass = new Popup('.profile-popup');
 const cardsPopupClass = new Popup('.popup-cards');
 const imgClick = new PopupWithImage('.popup-img', '.popup-img__img-img', '.popup-img__text')

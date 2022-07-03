@@ -1,3 +1,15 @@
+
+
+export const editButton = document.querySelector('.profile__edit-button'); // Кнопка изменения
+export const profileForm = document.querySelector('.popup__form') // На изменение профиля
+export const nameInput = document.querySelector('.popup__input_field_title');
+export const jobInput = document.querySelector('.popup__input_field_subtitle');
+export const buttonAdd = document.querySelector('.profile__add-button')
+export const cardsPopup  = document.querySelector('.popup-cards')
+export const cardForm = cardsPopup.querySelector('.popup__form')
+export const popupImgOpen = document.querySelector('.popup-img')
+export const imgPopupCloseBtn = popupImgOpen.querySelector('.popup__close-icon')
+
 export const validationConfig = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
