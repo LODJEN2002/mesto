@@ -1,11 +1,13 @@
-import { validationConfig as enableValidationObj } from './utils.js'
 export class FormValidator {
   constructor(enableValidationObj, formElement) {
-    this._formElement = formElement
-    this._inputElement = this._formElement.querySelector(enableValidationObj.inputSelector)
+    this._enableValidationObj = enableValidationObj;
 
-    this._inputList = Array.from(this._formElement.querySelectorAll(enableValidationObj.inputSelector))
-    this._buttonElement = this._formElement.querySelector(enableValidationObj.submitButtonSelector)
+    this._formElement = formElement;
+
+    this._inputElement = this._formElement.querySelector(this._enableValidationObj.inputSelector);
+
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._enableValidationObj.inputSelector));
+    this._buttonElement = this._formElement.querySelector(this._enableValidationObj.submitButtonSelector);
 
   }
   
@@ -21,16 +23,16 @@ export class FormValidator {
 
   _showInputError(inputElement) {
     this._formError = this._formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.add(enableValidationObj.inputErrorClass);
+    inputElement.classList.add(this._enableValidationObj.inputErrorClass);
     this._formError.textContent = this._inputElement.validationMessage;
-    this._formError.classList.add(enableValidationObj.errorClass);
+    this._formError.classList.add(this._enableValidationObj.errorClass);
   }
 
   _hideInputError(inputElement) {
     this._formError = this._formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.remove(enableValidationObj.inputErrorClass);
+    inputElement.classList.remove(this._enableValidationObj.inputErrorClass);
     this._formError.textContent = '';
-    this._formError.classList.remove(enableValidationObj.errorClass);
+    this._formError.classList.remove(this._enableValidationObj.errorClass);
   }
 
   _isValid(inputElement) {
@@ -50,10 +52,10 @@ export class FormValidator {
   _toggleButtonState() {
   if(this._hasInvalidInput(this._inputList)) {
     this._buttonElement.setAttribute('disabled', true)
-    this._buttonElement.classList.add(enableValidationObj.inactiveButtonClass)
+    this._buttonElement.classList.add(this._enableValidationObj.inactiveButtonClass)
   }else {
     this._buttonElement.removeAttribute('disabled')
-    this._buttonElement.classList.remove(enableValidationObj.inactiveButtonClass)
+    this._buttonElement.classList.remove(this._enableValidationObj.inactiveButtonClass)
   }
 }
 

@@ -1,8 +1,7 @@
 import './styles/index.css'; // добавьте импорт главного файла стилей 
-import { FormValidator } from './FormValidator.js'
+import { validationConfig , initialCards } from './utils.js'
 import { Card } from './Card.js'
-import { validationConfig } from './utils.js'
-import { initialCards } from './utils.js'
+import { FormValidator } from './FormValidator.js'
 import { Section } from './Section.js'
 import { Popup } from './Popup.js'
 import { PopupWithImage } from './PopupWithImage.js'
@@ -36,7 +35,7 @@ const popupList = Array.from(document.querySelectorAll('.popup'));
 const imgMask = document.querySelector('.elements__element');
 const profilePopupClass = new Popup('.profile-popup');
 const cardsPopupClass = new Popup('.popup-cards');
-const imgClick = new PopupWithImage('.popup-img')
+const imgClick = new PopupWithImage('.popup-img', '.popup-img__img-img', '.popup-img__text')
 const newInfo = new UserInfo({ selectorName: '.profile__info-text-title' , selectorJob: '.profile__info-text-subtitle' })
 
 imgClick.setEventListeners()
@@ -81,7 +80,6 @@ function handleCardFormSubmit(data) {
   })
   section.addItem(card)
   cardsPopupSubmit.close();
-  saveButton.classList.add('popup__button_disabled')
 }
 
 buttonAdd.addEventListener('click', function() {
