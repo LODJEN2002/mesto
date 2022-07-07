@@ -8,7 +8,6 @@ export class FormValidator {
 
     this._inputList = Array.from(this._formElement.querySelectorAll(this._enableValidationObj.inputSelector));
     this._buttonElement = this._formElement.querySelector(this._enableValidationObj.submitButtonSelector);
-
   }
   
   _setEventListeners() {
@@ -64,7 +63,11 @@ export class FormValidator {
       evt.preventDefault();
     });
     this._setEventListeners();
-};
+}
+
+  buttonDisabled() {
+    this._buttonElement.classList.add('popup__button_disabled')
+  }
   
 }
 

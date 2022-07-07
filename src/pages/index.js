@@ -15,8 +15,6 @@ import { PopupWithImage } from '../components/PopupWithImage.js'
 import { PopupWithForm } from '../components/PopupWithForm.js'
 import { UserInfo } from '../components/UserInfo.js'
 
-const profilePopupClass = new Popup('.profile-popup');
-const cardsPopupClass = new Popup('.popup-cards');
 const imgClick = new PopupWithImage('.popup-img', '.popup-img__img-img', '.popup-img__text')
 const newInfo = new UserInfo({ selectorName: '.profile__info-text-title' , selectorJob: '.profile__info-text-subtitle' })
 
@@ -26,7 +24,8 @@ function openProfilePopup() {
   const { name , job } = newInfo.getUserInfo()
   nameInput.value = name;
   jobInput.value = job;
-  profilePopupClass.open()
+  profilePopupSubmit.open();
+  profileFormValid.buttonDisabled();
 }
 
 editButton.addEventListener('click' , openProfilePopup);
@@ -39,7 +38,6 @@ function handleProfileFormSubmit (data) {
   const { name , job } = data
   newInfo.setUserInfo(name , job)
   profilePopupSubmit.close()
-
 }
 
 function createCard(item) {
@@ -65,7 +63,8 @@ function handleCardFormSubmit(data) {
 }
 
 buttonAdd.addEventListener('click', function() {
-  cardsPopupClass.open();
+  cardsPopupSubmit.open();
+  cardFormValid.buttonDisabled()
 });
 
 
