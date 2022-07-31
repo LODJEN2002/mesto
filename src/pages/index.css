@@ -47,3 +47,110 @@
 @import "../blocks/popup/__input/popup__input_type_error.css";
 @import "../blocks/popup/__error/popup__error-subtitle.css";
 /*================== Popup ===================== */
+
+.elements__subtitle {
+   display: grid; 
+}
+
+.element__number-like {
+    margin: 0;
+    margin-top: 3px;
+    margin-left: 6px;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center;
+    height: 13px;
+    width: 10px;
+}
+
+.popup-delite__container {
+    width: 430px;
+    height: 181px;
+    background-color: white;
+    position: relative;
+    border-radius: 10px;
+}
+
+.popup__close-icon {
+    cursor: pointer;
+    margin-top: -40px;
+    position: absolute;
+    right: -40px;
+    text-align: center;
+}
+.popup-delite__text {
+    color: black;
+    height: 23px;
+    width: 358px;
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 29px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-left: 36px;
+    margin-top: 34px;
+    margin-bottom: 38px;
+}
+
+.popup-delite__button {
+    background-color: black;
+    width: 358px;
+    height: 50px;
+    color: white;
+    font-family: Inter;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: center;
+    margin-left: 36px;
+    cursor: pointer;
+}
+
+.popup-delite__button:hover {
+    opacity: 0.8;
+}
+
+
+.popup-avatar__container{
+    width: 430px;
+    height: 272px;
+    background-color: white;
+    position: relative;
+    border-radius: 10px;
+}
+
+.popup-avatar__text {
+    color: black;
+    height: 23px;
+    width: 358px;
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 29px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-left: 36px;
+    margin-top: 34px;
+    margin-bottom:40.7px ;
+}
+
+.popup-avatar__input {
+    border: solid rgba(0,0,0,.2);
+    border-width: 0 0 1px;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    height: 14px;
+    line-height: 17px;
+    margin-bottom: 48px;
+    margin-left: 36px;
+    min-width: 358px;
+    outline-color: #add8e6;
+    padding: 13px 0;
+}
+

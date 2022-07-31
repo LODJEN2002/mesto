@@ -9,6 +9,10 @@ export const cardsPopup  = document.querySelector('.popup-cards')
 export const cardForm = cardsPopup.querySelector('.popup__form')
 export const popupImgOpen = document.querySelector('.popup-img')
 export const imgPopupCloseBtn = popupImgOpen.querySelector('.popup__close-icon')
+export const profileAva = document.querySelector('.profile__avatar');
+export const profileName = document.querySelector('.profile__info-text-title');
+export const profileJob = document.querySelector('.profile__info-text-subtitle');
+
 
 export const validationConfig = {
     formSelector: '.popup__form',

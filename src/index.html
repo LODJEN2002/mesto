@@ -28,7 +28,10 @@
                     <img class="elements__trash" src="<%=require('./images/Trash.svg')%>" alt="Мусорка" />
                     <div class="elements__group-white">
                         <p class="elements__title"></p>
-                        <button class="elements__group" type="button"></button>
+                        <div class="elements__subtitle">
+                            <button class="elements__group" type="button"></button>
+                            <p class="element__number-like">0</p>
+                        </div>
                     </div>
                 </article>
               </template>
@@ -68,6 +71,23 @@
             <img class="popup-img__img-img" src="https://i.ytimg.com/vi/NKk6rGDpq6Y/sddefault.jpg" alt="картинка-фул-скрин">
             <p class="popup-img__text"></p>
           </div>
+        </div>
+        <div class="popup popup-delite">
+            <div class="popup-delite__container">
+                <img class="popup__close-icon" src="<%=require('./images/Close-Icon.svg')%>" alt="Закрытие" />
+                <p class="popup-delite__text">Вы уверены?</p>
+                <button class="popup-delite__button" type="submit">Да</button>
+            </div>
+        </div>
+        <div class="popup popup-avatar">
+            <div class="popup-avatar__container">
+                <img class="popup__close-icon" src="<%=require('./images/Close-Icon.svg')%>" alt="Закрытие" />
+                <p class="popup-avatar__text">Обновить аватар</p>
+                <form class="popup__form" name="avatar-name">
+                    <input id="avatar-input" class="popup__input popup-avatar__input" type="url" name="avatar_url" placeholder="Ссылка на аватар" required />
+                    <button class="popup-delite__button" type="submit">Сохранить</button>
+                </form>
+            </div>
         </div>
     </body>
 </html>

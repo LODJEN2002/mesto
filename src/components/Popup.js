@@ -3,7 +3,6 @@ export class Popup {
       this._popupSelector = document.querySelector(popupSelector);
       this._closeIcon = this._popupSelector.querySelector('.popup__close-icon')
       this._handleEscClose = this._handleEscClose.bind(this)
-      
     }
   
     open() {
