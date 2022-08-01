@@ -40,32 +40,9 @@ export class Card {
       this.likes.some(num => {
         if(num._id === '297072208aef3e18899373f7'){
           this._like.classList.add('elements__group-like')
-          // this._like.addEventListener('click', () => {            // Работает но один раз
-          //   this._numberLike.textContent = this.likeLength - 1
-          //   this._like.classList.remove('elements__group-like')
-          //   console.log('hellp')
-          // })
+
         }
       })
-
-      // if(this._element.querySelector('.elements__group-like')) {
-      //   console.log('hello like')
-      // }
-      // else {
-      //   console.log('hello dis')
-      // }
-
-      // if(this.likes._id !== "297072208aef3e18899373f7"){
-      //   console.log('hello')
-      // }  
-      
-      // if(this.likes[0]._id !== '297072208aef3e18899373f7') {
-      //   console.log(this.likes)
-      // }
-      
-
-      // Если одно Состояне то одна фунция, если другое то другая.
-      // Если карточка лайкнута, тогда при нажатии другая функция.
 
       return this._element;
     }
@@ -101,7 +78,7 @@ export class Card {
     deliteLike() {
       this._like.classList.remove('elements__group-like');
       this.likeLength -= 1;
-      this._numberLike.textContent = this.likeLength;;
+      this._numberLike.textContent = this.likeLength;
     }
 
     handleOkClick() {

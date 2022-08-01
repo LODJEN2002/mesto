@@ -31,4 +31,12 @@ export class PopupWithForm extends Popup {
 
         this._form.reset();
     }
+
+    renderLoading(isLoading, text, textLoader) {
+        if(isLoading) {
+            this._popupSelector.querySelector('.popup__button').textContent = textLoader
+        }else{
+            this._popupSelector.querySelector('.popup__button').textContent = text
+        }
+      }
 }

@@ -48,12 +48,21 @@ avatarForm.addEventListener('submit', handleAvatarFormSubmit)
 
 function handleAvatarFormSubmit(evt) {
   evt.preventDefault()
-  console.log(avatarInput.value)
+  renderLoading(true , "Сохранить" , "Сохранение...")
   avatar.src = avatarInput.value;
-  api.newAvatar(avatarInput.value)
   popupProfileAvatar.close()
+  api.newAvatar(avatarInput.value)
+    .finally(() => (renderLoading(false , "Сохранить" , "Сохранение...")))
 }
 
+
+function renderLoading(isLoading, text, textLoader) {
+  if(isLoading) {
+      document.querySelector('.popup-avatar__save-button').textContent = textLoader
+  }else{
+      document.querySelector('.popup-avatar__save-button').textContent = text
+  }
+}
 
 function openProfilePopup() {
   const { name , job } = newInfo.getUserInfo()
@@ -70,12 +79,17 @@ const profilePopupSubmit = new PopupWithForm('.profile-popup', handleProfileForm
 profilePopupSubmit.setEventListeners()
 
 function handleProfileFormSubmit (data) {
+  profilePopupSubmit.renderLoading(true , "Сохранить" , "Сохранение...")
   const { name , job } = data
   newInfo.setUserInfo(name , job)
   profilePopupSubmit.close()
   //Изменение профиля
   api.patchProfileInfo(profileName, profileJob)
+  .finally(() => profilePopupSubmit.renderLoading(false , "Сохранить"  ))
 }
+
+
+
 
 function createCard(cardData) {
   const newCard = new Card(
@@ -121,24 +135,23 @@ function createCard(cardData) {
 
 
 
-
 const cardsPopupSubmit = new PopupWithForm('.popup-cards', handleCardFormSubmit);
 
 cardsPopupSubmit.setEventListeners();
 
 function handleCardFormSubmit(data) {
+  cardsPopupSubmit.renderLoading(true , "Создать" , "Создание...")
   const card = createCard({
     name: data['field-text-title'],
     link: data['field-text-subtitle'],
-    owner: {_id:'297072208aef3e18899373f7'},
+    owner: {_id},
     likes: []
   })
-  
   section.addItem(card)
   cardsPopupSubmit.close();
   // Добавление новой карточки
   api.newCard(data['field-text-title'], data['field-text-subtitle'])
-  // .then(res => console.log(res))
+    .finally(() => cardsPopupSubmit.renderLoading(false , "Создать" , "Создание..."))
 }
 
 buttonAdd.addEventListener('click', function() {
@@ -186,34 +199,6 @@ api.getProfileInfo()
       profileAva.src = res.avatar
     })  
 
-
-  fetch('https://mesto.nomoreparties.co/v1/cohort-46/cards', {
-  headers: {
-    authorization: '231bffe2-4e48-4380-b6b6-62d7cd2fd2a9'
-  }
-})
-.then(res => res.json())
-.then(res => console.log(res))
-// .then(res => 
-//   res.forEach(item => {
-//     console.log(item.likes.length)
-//   })
-// )
-
-
-
-
-
-// Постановка лайка на карточку 
-
-// fetch('https://mesto.nomoreparties.co/v1/cohort-46/cards/62e252e445e5210a63b6661c/likes', {
-//   method: 'PUT',
-//   headers: {
-//     authorization: '231bffe2-4e48-4380-b6b6-62d7cd2fd2a9'
-//   }
-// })
-// .then(res => res.json())
-// .then(res => console.log(res))
 
 
 

@@ -11,6 +11,8 @@
 @import "../blocks/profile/__info-text-subtitle/profile__info-text-subtitle.css";
 @import "../blocks/profile/__edit-button/profile__edit-button.css";
 @import "../blocks/profile/__add-button/profile__add-button.css";
+@import "../blocks/profile/__avatar-edit/profile__avatar-edit.css";
+
 /*================== Profile ===================== */
 @import "../blocks/elements/elements.css";
 @import "../blocks/elements/__element/elements__element.css";
@@ -20,6 +22,10 @@
 @import "../blocks/elements/__group/elements__group.css";
 @import "../blocks/elements/__group/elements__group-like.css";
 @import "../blocks/elements/__trash/elements__trash.css";
+@import "../blocks/elements/__group-subtitle/elements__group-subtitle.css";
+@import "../blocks/elements/__number-like/element__number-like.css";
+
+
 /*================== Elements ===================== */
 @import "../blocks/footer/footer.css";
 @import "../blocks/footer/__mesto/footer__mesto.css";
@@ -46,111 +52,11 @@
 @import "../blocks/popup/__error/popup__error_visible.css";
 @import "../blocks/popup/__input/popup__input_type_error.css";
 @import "../blocks/popup/__error/popup__error-subtitle.css";
+@import "../blocks/popup-delite/__container/popup-delite__container.css";
+@import "../blocks/popup-delite/__text/popup-delite__text.css";
+@import "../blocks/popup-delite/__button/popup-delite__button.css";
+@import "../blocks/popup-avatar/__container/popup-avatar__container.css";
+@import "../blocks/popup-avatar/__text/popup-avatar__text.css";
+@import "../blocks/popup-avatar/__input/popup-avatar__input.css";
+@import "../blocks/popup-avatar/__save-button/popup-avatar__save-button.css";
 /*================== Popup ===================== */
-
-.elements__subtitle {
-   display: grid; 
-}
-
-.element__number-like {
-    margin: 0;
-    margin-top: 3px;
-    margin-left: 6px;
-    font-family: Inter;
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 16px;
-    letter-spacing: 0em;
-    text-align: center;
-    height: 13px;
-    width: 10px;
-}
-
-.popup-delite__container {
-    width: 430px;
-    height: 181px;
-    background-color: white;
-    position: relative;
-    border-radius: 10px;
-}
-
-.popup__close-icon {
-    cursor: pointer;
-    margin-top: -40px;
-    position: absolute;
-    right: -40px;
-    text-align: center;
-}
-.popup-delite__text {
-    color: black;
-    height: 23px;
-    width: 358px;
-    font-family: Inter;
-    font-size: 24px;
-    font-weight: 900;
-    line-height: 29px;
-    letter-spacing: 0em;
-    text-align: left;
-    margin-left: 36px;
-    margin-top: 34px;
-    margin-bottom: 38px;
-}
-
-.popup-delite__button {
-    background-color: black;
-    width: 358px;
-    height: 50px;
-    color: white;
-    font-family: Inter;
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 22px;
-    letter-spacing: 0em;
-    text-align: center;
-    margin-left: 36px;
-    cursor: pointer;
-}
-
-.popup-delite__button:hover {
-    opacity: 0.8;
-}
-
-
-.popup-avatar__container{
-    width: 430px;
-    height: 272px;
-    background-color: white;
-    position: relative;
-    border-radius: 10px;
-}
-
-.popup-avatar__text {
-    color: black;
-    height: 23px;
-    width: 358px;
-    font-family: Inter;
-    font-size: 24px;
-    font-weight: 900;
-    line-height: 29px;
-    letter-spacing: 0em;
-    text-align: left;
-    margin-left: 36px;
-    margin-top: 34px;
-    margin-bottom:40.7px ;
-}
-
-.popup-avatar__input {
-    border: solid rgba(0,0,0,.2);
-    border-width: 0 0 1px;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    height: 14px;
-    line-height: 17px;
-    margin-bottom: 48px;
-    margin-left: 36px;
-    min-width: 358px;
-    outline-color: #add8e6;
-    padding: 13px 0;
-}
-
