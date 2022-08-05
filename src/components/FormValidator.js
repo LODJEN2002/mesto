@@ -18,6 +18,7 @@ export class FormValidator {
         this._toggleButtonState()
       })
     })
+
   }
 
   _showInputError(inputElement) {
@@ -68,7 +69,13 @@ export class FormValidator {
   buttonDisabled() {
     this._buttonElement.classList.add('popup__button_disabled')
   }
-  
+
+  hideError() {
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement)
+    })
+  }
+
 }
 
 

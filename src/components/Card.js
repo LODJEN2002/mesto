@@ -5,6 +5,7 @@ export class Card {
       this.link = cardData.link;
       this.owner = cardData.owner;
       this._id = this.owner._id;
+      this._userId = cardData.currentUserId;
       this.idCard = cardData._id;
       this.likes = cardData.likes
       this.likeLength = this.likes.length // Кол-во лайков.
@@ -30,7 +31,7 @@ export class Card {
       this._element.querySelector('.elements__title').textContent = this.name; 
       this._maskGroup.src = this.link;
       this._maskGroup.alt = this.name
-      if(this._id !== '297072208aef3e18899373f7'){
+      if(this._id !== this._userId){
         this._element.querySelector('.elements__trash').remove()
       }
       this._numberLike = this._element.querySelector('.element__number-like')
@@ -38,9 +39,8 @@ export class Card {
       this._like = this._element.querySelector('.elements__group')
 
       this.likes.some(num => {
-        if(num._id === '297072208aef3e18899373f7'){
+        if(num._id === this._userId){
           this._like.classList.add('elements__group-like')
-
         }
       })
 

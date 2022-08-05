@@ -75,23 +75,23 @@
             <p class="popup-img__text"></p>
           </div>
         </div>
+        <div class="popup popup-avatar">
+            <div class="popup-avatar__container">
+                <img class="popup__close-icon" src="<%=require('./images/Close-Icon.svg')%>" alt="Закрытие" />
+                <p class="popup-avatar__text">Обновить аватар</p>
+                <form class="popup__form" name="avatar">
+                    <input id="avatar-input" class="popup__input popup-avatar__input" type="url" name="avatar" placeholder="Ссылка на аватар" required />
+                    <span class="avatar-input-error popup__error-hidden"></span>
+                    <button  class="popup__button popup__button_disabled"  type="submit">Сохранить</button>
+                </form>
+            </div>
+        </div>
         <div class="popup popup-delite">
             <div class="popup-delite__container">
                 <img class="popup__close-icon" src="<%=require('./images/Close-Icon.svg')%>" alt="Закрытие" />
                 <p class="popup-delite__text">Вы уверены?</p>
                 <button class="popup-delite__button" type="submit">Да</button>
             </div>
-        </div>
-        <div class="popup popup-avatar">
-            <div class="popup-avatar__container">
-                <img class="popup__close-icon" src="<%=require('./images/Close-Icon.svg')%>" alt="Закрытие" />
-                <p class="popup-avatar__text">Обновить аватар</p>
-                <form class="popup__form" name="avatar-name">
-                    <input id="avatar-input" class="popup__input popup-avatar__input" type="url" name="avatar_url" placeholder="Ссылка на аватар" required />
-                    <button class="popup-avatar__save-button"  type="submit">Сохранить</button>
-                    <!-- popup-save__button -->
-                </form>
-            </div>
-        </div>
+        </div>  
     </body>
 </html>

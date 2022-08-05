@@ -16,80 +16,75 @@ import { Section } from '../components/Section.js'
 import { Popup } from '../components/Popup.js'
 import { PopupWithImage } from '../components/PopupWithImage.js'
 import { PopupWithForm } from '../components/PopupWithForm.js'
-// import { PopupWithAvatar } from '../components/PopupWithAvatar.js'
+import { PopupWithSubmit } from '../components/PopupWithSubmit.js'
 import { UserInfo } from '../components/UserInfo.js'
 import { Api } from '../components/Api.js'
 
-const imgClick = new PopupWithImage('.popup-img', '.popup-img__img-img', '.popup-img__text')
-const newInfo = new UserInfo({ selectorName: '.profile__info-text-title' , selectorJob: '.profile__info-text-subtitle' })
-
-const _id = '297072208aef3e18899373f7'
-
-imgClick.setEventListeners()
-
-const popupDeliteCardDva = new Popup('.popup-delite')
-
-
 const avatar = document.querySelector('.profile__avatar')
-const popupProfileAvatar = new Popup('.popup-avatar')
-const buttonOk = document.querySelector('.popup-delite__button')
 const avatarPopup = document.querySelector('.popup-avatar')
 const avatarForm = avatarPopup.querySelector('.popup__form')
-const avatarInput = document.querySelector('.popup-avatar__input')
-const popupDeliteCard = document.querySelector('.popup-delite')
+const avatarInput = avatarForm.querySelector('.popup__input')
+let _id = null
+let idCard = null
+
+const popupWithImage = new PopupWithImage('.popup-img', '.popup-img__img-img', '.popup-img__text')
+const userInfo = new UserInfo({ selectorName: '.profile__info-text-title' , selectorJob: '.profile__info-text-subtitle' })
+const profileFormValid = new FormValidator(validationConfig, profileForm);
+const cardFormValid = new FormValidator(validationConfig, cardForm);
+const avatarFormValid = new FormValidator(validationConfig, avatarForm);
+const popupDeliteCardDva = new PopupWithSubmit('.popup-delite')
+const popupEditProfile = new PopupWithForm('.profile-popup', handleProfileFormSubmit)
+const popupAddCard = new PopupWithForm('.popup-cards', handleCardFormSubmit);
+const popupProfileAvatar = new PopupWithForm('.popup-avatar', handleAvatarFormSubmit)
+
+profileFormValid.enableValidation();
+cardFormValid.enableValidation();
+avatarFormValid.enableValidation();
+popupWithImage.setEventListeners();
+popupProfileAvatar.setEventListeners();
+popupDeliteCardDva.setEventListeners();
+popupAddCard.setEventListeners();
+popupEditProfile.setEventListeners();
 
 avatar.addEventListener('click', () => {
+  avatarFormValid.hideError()
   popupProfileAvatar.open()
-  popupProfileAvatar.setEventListeners()
   avatarInput.value = ''
 })
 
-avatarForm.addEventListener('submit', handleAvatarFormSubmit)
 
-function handleAvatarFormSubmit(evt) {
-  evt.preventDefault()
-  renderLoading(true , "Сохранить" , "Сохранение...")
-  avatar.src = avatarInput.value;
-  popupProfileAvatar.close()
+function handleAvatarFormSubmit() {
+  popupProfileAvatar.renderLoading(true , "Сохранить" , "Сохранение...")
   api.newAvatar(avatarInput.value)
-    .finally(() => (renderLoading(false , "Сохранить" , "Сохранение...")))
-}
-
-
-function renderLoading(isLoading, text, textLoader) {
-  if(isLoading) {
-      document.querySelector('.popup-avatar__save-button').textContent = textLoader
-  }else{
-      document.querySelector('.popup-avatar__save-button').textContent = text
-  }
+    .then(avatar.src = avatarInput.value)    
+    .then(popupProfileAvatar.close())
+    .finally(() => (popupProfileAvatar.renderLoading(false , "Сохранить" , "Сохранение...")))
 }
 
 function openProfilePopup() {
-  const { name , job } = newInfo.getUserInfo()
+  profileFormValid.hideError()
+  const { name , job } = userInfo.getUserInfo()
+  // console.log(userInfo.getUserInfo())
   nameInput.value = name;
   jobInput.value = job;
-  profilePopupSubmit.open();
+  popupEditProfile.open();
   profileFormValid.buttonDisabled();
 }
 
 editButton.addEventListener('click' , openProfilePopup);
 
-const profilePopupSubmit = new PopupWithForm('.profile-popup', handleProfileFormSubmit)
-
-profilePopupSubmit.setEventListeners()
-
 function handleProfileFormSubmit (data) {
-  profilePopupSubmit.renderLoading(true , "Сохранить" , "Сохранение...")
-  const { name , job } = data
-  newInfo.setUserInfo(name , job)
-  profilePopupSubmit.close()
+  popupEditProfile.renderLoading(true , "Сохранить" , "Сохранение...")
   //Изменение профиля
-  api.patchProfileInfo(profileName, profileJob)
-  .finally(() => profilePopupSubmit.renderLoading(false , "Сохранить"  ))
+  api.patchProfileInfo(profileName , profileJob)
+    .then(() => {
+      const { name , job } = data
+      userInfo.setUserInfo(name , job)
+      api.patchProfileInfo(profileName , profileJob)
+    })
+    .then(popupEditProfile.close())
+    .finally(() => popupEditProfile.renderLoading(false , "Сохранить"  ))
 }
-
-
-
 
 function createCard(cardData) {
   const newCard = new Card(
@@ -100,32 +95,36 @@ function createCard(cardData) {
         owner: cardData.owner,
         _id: cardData._id,
         likes: cardData.likes,
+        currentUserId: _id,
       },
       handleImageClick: () => {
-        imgClick.open(cardData.name, cardData.link)
+        popupWithImage.open(cardData.name, cardData.link)
       },
       handleTrashClick: () => {
         popupDeliteCardDva.open()
-        popupDeliteCardDva.setEventListeners()
         const popup = document.querySelector('.popup_opened')
         const buttonOkay = popup.querySelector('.popup-delite__button')
         buttonOkay.addEventListener('click' , () => {
           newCard.handleOkClick()
-          popupDeliteCardDva.close()
           const cardId = newCard.returnCardId()
           api.deliteCard(cardId)
+            .then(popupDeliteCardDva.close())
+            .catch(error => console.log(error))
         })
       },
       handleLikeClick: () => {
-        newCard.addLike()
         const cardId = newCard.returnCardId()
+        console.log(cardId)
         api.likeCard(cardId)
+          .then(newCard.addLike())
+          .catch(error => console.log(error))
       },
       handleLikeOff: () => {
-        newCard.deliteLike()
         const cardId = newCard.returnCardId()
         api.likeOffCard(cardId)
-      }
+          .then(newCard.deliteLike())
+          .catch(error => console.log(error))
+      },
     }, '.card-template',
   );
   const cardElement = newCard.generateCard();
@@ -133,48 +132,34 @@ function createCard(cardData) {
   return cardElement;
 }
 
-
-
-const cardsPopupSubmit = new PopupWithForm('.popup-cards', handleCardFormSubmit);
-
-cardsPopupSubmit.setEventListeners();
-
 function handleCardFormSubmit(data) {
-  cardsPopupSubmit.renderLoading(true , "Создать" , "Создание...")
-  const card = createCard({
-    name: data['field-text-title'],
-    link: data['field-text-subtitle'],
-    owner: {_id},
-    likes: []
-  })
-  section.addItem(card)
-  cardsPopupSubmit.close();
+  popupAddCard.renderLoading(true , "Создать" , "Создание...")
   // Добавление новой карточки
-  api.newCard(data['field-text-title'], data['field-text-subtitle'])
-    .finally(() => cardsPopupSubmit.renderLoading(false , "Создать" , "Создание..."))
+  api.addNewCard(data['field-text-title'], data['field-text-subtitle'])
+    .then((res) => {
+      idCard = res._id
+    })
+    .then(() => {
+      const card = createCard({
+        name: data['field-text-title'],
+        link: data['field-text-subtitle'],
+        owner: {_id},
+        likes: [],
+        _id: idCard,
+      })
+      section.addItem(card)
+    })
+    .then(popupAddCard.close())  
+    .finally(() => popupAddCard.renderLoading(false , "Создать" , "Создание..."))
 }
 
 buttonAdd.addEventListener('click', function() {
-  cardsPopupSubmit.open();
+  cardFormValid.hideError()
+  popupAddCard.open();
   cardFormValid.buttonDisabled()
 });
 
-
-imgPopupCloseBtn.addEventListener('click', function() {
-  imgClick.close();
-})
-
-const profileFormValid = new FormValidator(validationConfig, profileForm);
-const cardFormValid = new FormValidator(validationConfig, cardForm);
-
-
-
-profileFormValid.enableValidation();
-cardFormValid.enableValidation();
-
 const section = new Section({ items: initialCards, renderer: createCard }, '.elements')
-
-
 
 const apiConfig = {
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-46',
@@ -185,20 +170,17 @@ const apiConfig = {
 }
 const api = new Api(apiConfig);
 
-api.getInitialCards()
-  .then(initalCards => {
-    const sectionNew = new Section({ items: initalCards, renderer: createCard }, '.elements')
-    
-    sectionNew.renderItem()
-})
+Promise.all([api.getProfileInfo(), api.getInitialCards()])
+  .then(([profileInfo, initialCards]) => {
+    _id = profileInfo._id
 
-api.getProfileInfo()
-    .then(res => {
-      profileName.textContent =  res.name
-      profileJob.textContent = res.about
-      profileAva.src = res.avatar
-    })  
+    userInfo.setUserInfo(profileInfo.name, profileInfo.about)
+    profileAva.src = profileInfo.avatar
 
-
+    const section = new Section({ items: initialCards, renderer: createCard }, '.elements')
+    section.renderItem()
+    console.log(initialCards)
+  })
+  .catch(error => console.error(error))
 
 
