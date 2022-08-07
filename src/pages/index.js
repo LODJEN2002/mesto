@@ -9,7 +9,7 @@ import { editButton,
   profileAva,
   profileName,
   profileJob,
-  validationConfig , initialCards } from '../components/utils.js'
+  validationConfig , initialCards } from '../components/utils/utils.js'
 import { Card } from '../components/Card.js'
 import { FormValidator } from '../components/FormValidator.js'
 import { Section } from '../components/Section.js'
@@ -20,6 +20,14 @@ import { PopupWithSubmit } from '../components/PopupWithSubmit.js'
 import { UserInfo } from '../components/UserInfo.js'
 import { Api } from '../components/Api.js'
 
+const apiConfig = {
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-46',
+  headers: {
+    authorization: '231bffe2-4e48-4380-b6b6-62d7cd2fd2a9',
+    'Content-Type': 'application/json'
+  },
+}
+const api = new Api(apiConfig);
 const avatar = document.querySelector('.profile__avatar')
 const avatarPopup = document.querySelector('.popup-avatar')
 const avatarForm = avatarPopup.querySelector('.popup__form')
@@ -32,17 +40,19 @@ const userInfo = new UserInfo({ selectorName: '.profile__info-text-title' , sele
 const profileFormValid = new FormValidator(validationConfig, profileForm);
 const cardFormValid = new FormValidator(validationConfig, cardForm);
 const avatarFormValid = new FormValidator(validationConfig, avatarForm);
-const popupDeliteCardDva = new PopupWithSubmit('.popup-delite')
+const popupDeleteCard = new PopupWithSubmit('.popup-delite' , '.popup__form')
 const popupEditProfile = new PopupWithForm('.profile-popup', handleProfileFormSubmit)
 const popupAddCard = new PopupWithForm('.popup-cards', handleCardFormSubmit);
 const popupProfileAvatar = new PopupWithForm('.popup-avatar', handleAvatarFormSubmit)
+const section = new Section({ items: initialCards, renderer: createCard }, '.elements')
+
 
 profileFormValid.enableValidation();
 cardFormValid.enableValidation();
 avatarFormValid.enableValidation();
 popupWithImage.setEventListeners();
 popupProfileAvatar.setEventListeners();
-popupDeliteCardDva.setEventListeners();
+popupDeleteCard.setEventListeners();
 popupAddCard.setEventListeners();
 popupEditProfile.setEventListeners();
 
@@ -50,12 +60,12 @@ avatar.addEventListener('click', () => {
   avatarFormValid.hideError()
   popupProfileAvatar.open()
   avatarInput.value = ''
+  avatarFormValid.buttonDisabled()
 })
-
 
 function handleAvatarFormSubmit() {
   popupProfileAvatar.renderLoading(true , "Сохранить" , "Сохранение...")
-  api.newAvatar(avatarInput.value)
+  api.newAvatar(popupProfileAvatar.getInputValues().avatar)
     .then(avatar.src = avatarInput.value)    
     .then(popupProfileAvatar.close())
     .finally(() => (popupProfileAvatar.renderLoading(false , "Сохранить" , "Сохранение...")))
@@ -64,7 +74,6 @@ function handleAvatarFormSubmit() {
 function openProfilePopup() {
   profileFormValid.hideError()
   const { name , job } = userInfo.getUserInfo()
-  // console.log(userInfo.getUserInfo())
   nameInput.value = name;
   jobInput.value = job;
   popupEditProfile.open();
@@ -76,11 +85,10 @@ editButton.addEventListener('click' , openProfilePopup);
 function handleProfileFormSubmit (data) {
   popupEditProfile.renderLoading(true , "Сохранить" , "Сохранение...")
   //Изменение профиля
-  api.patchProfileInfo(profileName , profileJob)
+  api.patchProfileInfo(popupEditProfile.getInputValues().name , popupEditProfile.getInputValues().job)
     .then(() => {
       const { name , job } = data
       userInfo.setUserInfo(name , job)
-      api.patchProfileInfo(profileName , profileJob)
     })
     .then(popupEditProfile.close())
     .finally(() => popupEditProfile.renderLoading(false , "Сохранить"  ))
@@ -101,20 +109,17 @@ function createCard(cardData) {
         popupWithImage.open(cardData.name, cardData.link)
       },
       handleTrashClick: () => {
-        popupDeliteCardDva.open()
-        const popup = document.querySelector('.popup_opened')
-        const buttonOkay = popup.querySelector('.popup-delite__button')
-        buttonOkay.addEventListener('click' , () => {
-          newCard.handleOkClick()
-          const cardId = newCard.returnCardId()
-          api.deliteCard(cardId)
-            .then(popupDeliteCardDva.close())
+        popupDeleteCard.open()
+
+        popupDeleteCard.setSubmitAction(() => {
+          api.deliteCard(newCard.returnCardId())
+            .then(newCard.handleOkClick())
+            .then(popupDeleteCard.close())
             .catch(error => console.log(error))
         })
       },
       handleLikeClick: () => {
         const cardId = newCard.returnCardId()
-        console.log(cardId)
         api.likeCard(cardId)
           .then(newCard.addLike())
           .catch(error => console.log(error))
@@ -159,16 +164,6 @@ buttonAdd.addEventListener('click', function() {
   cardFormValid.buttonDisabled()
 });
 
-const section = new Section({ items: initialCards, renderer: createCard }, '.elements')
-
-const apiConfig = {
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-46',
-  headers: {
-    authorization: '231bffe2-4e48-4380-b6b6-62d7cd2fd2a9',
-    'Content-Type': 'application/json'
-  },
-}
-const api = new Api(apiConfig);
 
 Promise.all([api.getProfileInfo(), api.getInitialCards()])
   .then(([profileInfo, initialCards]) => {
@@ -177,9 +172,8 @@ Promise.all([api.getProfileInfo(), api.getInitialCards()])
     userInfo.setUserInfo(profileInfo.name, profileInfo.about)
     profileAva.src = profileInfo.avatar
 
-    const section = new Section({ items: initialCards, renderer: createCard }, '.elements')
-    section.renderItem()
-    console.log(initialCards)
+    const section = new Section({ items: initialCards.reverse(), renderer: createCard }, '.elements')
+    section.renderItems()
   })
   .catch(error => console.error(error))
 

@@ -33,8 +33,8 @@ export class Api {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
-                name: name.textContent,
-                about: job.textContent,
+                name: name,
+                about: job,
               })
         })
         .then(this._checkRes)
