@@ -63,9 +63,9 @@ avatar.addEventListener('click', () => {
   avatarFormValid.buttonDisabled()
 })
 
-function handleAvatarFormSubmit() {
+function handleAvatarFormSubmit(inputValues) {
   popupProfileAvatar.renderLoading(true , "Сохранить" , "Сохранение...")
-  api.newAvatar(popupProfileAvatar.getInputValues().avatar)
+  api.newAvatar(inputValues.avatar)
     .then(avatar.src = avatarInput.value)    
     .then(popupProfileAvatar.close())
     .finally(() => (popupProfileAvatar.renderLoading(false , "Сохранить" , "Сохранение...")))
@@ -85,7 +85,7 @@ editButton.addEventListener('click' , openProfilePopup);
 function handleProfileFormSubmit (data) {
   popupEditProfile.renderLoading(true , "Сохранить" , "Сохранение...")
   //Изменение профиля
-  api.patchProfileInfo(popupEditProfile.getInputValues().name , popupEditProfile.getInputValues().job)
+  api.patchProfileInfo(data.name , data.job)
     .then(() => {
       const { name , job } = data
       userInfo.setUserInfo(name , job)
